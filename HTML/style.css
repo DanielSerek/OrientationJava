@@ -1,0 +1,41 @@
+body{
+    margin: 0;
+    font-family: arial;
+}
+  
+table{
+    border-collapse: collapse;
+    margin: 40px;
+    border: 40px solid rgb(42, 188, 236)
+}
+
+th,td {
+    border: 2px solid rgb(179, 177, 177)
+}
+
+th {
+    background:#0d0d0d;
+    color: grey;
+    text-indent: 30px;
+    line-height: 100px;
+    height: 50px;
+    text-align: left;
+    font-size: 25px;
+}
+
+td {
+    width: 300px;
+    color: rgb(65, 64, 64);
+    font-size: 25px;
+    text-indent: 30px;
+}
+
+tr{
+    line-height: 60px;
+    padding: 20px;
+}
+
+tr:nth-child(even){
+    background: rgba(221, 221, 221, 0.897);
+}
+  
