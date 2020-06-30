@@ -1,0 +1,69 @@
+body{
+    margin: 0;
+    font-family: arial;
+}
+
+#greybox{
+    display: flex;
+    margin: 30px auto;
+    width: 90%;
+    height: 800px;
+    background: rgb(206, 206, 206);
+}
+
+form{
+    margin: 30px auto 30px;
+    width: 500px;
+    height: 450px;
+    background: white;
+}
+
+h1{
+    font-size: 25px;
+    margin: 50px 50px;
+}
+
+label,input{
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: block;
+}
+
+label{
+    font-size: 70%;
+}
+
+#pass{
+    margin-top:20px;
+}
+
+a{
+    font-size: 70%;
+    text-align: right;
+    float: right;
+    margin-right: 50px;
+    margin-top: 5px;
+    color: grey;
+}
+
+#user input, #pass input{
+    width:79%;
+    height: 30px;
+    border: 1px solid grey;
+}
+
+#login input{
+    margin-top: 60px;
+    width: 28%;
+}
+
+#user input:hover, #pass input:hover{
+    border: 1px solid green;
+}
+
+
+
+
+
+  
