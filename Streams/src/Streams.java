@@ -23,7 +23,7 @@ public class Streams {
                 .filter(x -> x % 2 == 0)
                 .collect(Collectors.toList());
 
-        for (Integer number:evenNumbers) {
+        for (Integer number : evenNumbers) {
             System.out.println(number + " ");
         }
 
@@ -50,8 +50,8 @@ public class Streams {
         //Write a Stream Expression to get the average value of the odd numbers from the following list:
         List<Integer> numbers4 = asList(1, 3, -2, -4, -7, -3, -8, 12, 19, 6, 9, 10, 14);
         IntSummaryStatistics stats = numbers4.stream()
-                        .mapToInt((x) -> x)
-                        .summaryStatistics();
+                .mapToInt((x) -> x)
+                .summaryStatistics();
         System.out.println("Average of all numbers is: " + stats.getAverage());
 
         System.out.println("**********************************************************");
@@ -93,22 +93,22 @@ public class Streams {
         Character input = 'A';
         List<String> cities = asList("ROME", "LONDON", "NAIROBI", "CALIFORNIA", "ZURICH", "NEW DELHI", "AMSTERDAM", "ABU DHABI", "PARIS");
         cities.stream()
-                .filter(x -> x.substring(0,1).equals(input.toString()))
+                .filter(x -> x.substring(0, 1).equals(input.toString()))
                 .forEach(System.out::println);
 
         System.out.println("**********************************************************");
 
         // Write a Stream Expression to concatenate a Character list to a string!
-        ArrayList<Character> characters = new ArrayList<>(asList('A', 'h', 'o','j'));
-        String str = characters.stream().map(e->e.toString()).collect(Collectors.joining());
+        ArrayList<Character> characters = new ArrayList<>(asList('A', 'h', 'o', 'j'));
+        String str = characters.stream().map(e -> e.toString()).collect(Collectors.joining());
         System.out.println(str);
 
         System.out.println("**********************************************************");
 
         //Write a Stream Expression to find the frequency of characters in a given string!
         String s3 = "AadfaHjfaoasdfOJ";
-        Map<Character,Integer> charactersFrequency = s3.chars().boxed()
-                .collect(toMap(k -> Character.valueOf((char)k.intValue()),
+        Map<Character, Integer> charactersFrequency = s3.chars().boxed()
+                .collect(toMap(k -> Character.valueOf((char) k.intValue()),
                         v -> 1,
                         Integer::sum));
         System.out.println(charactersFrequency);
@@ -125,7 +125,7 @@ public class Streams {
         Fox fox3 = new Fox("Chicken Killer", "black", 10);
         Fox fox4 = new Fox("Lovely Fox", "green", 1);
         Fox fox5 = new Fox("Green Fox", "green", 3);
-        List<Fox> foxes = new ArrayList<>(asList(fox1,fox2,fox3,fox4,fox5));
+        List<Fox> foxes = new ArrayList<>(asList(fox1, fox2, fox3, fox4, fox5));
 
         List<Fox> greenFoxes = foxes.stream().filter(x -> x.getColor() == "green").collect(Collectors.toList());
         for (Fox greenFox : greenFoxes) {
@@ -140,7 +140,7 @@ public class Streams {
 
         System.out.println("**********************************************************");
 
-        Map<String,Integer> foxesByColor = foxes.stream()
+        Map<String, Integer> foxesByColor = foxes.stream()
                 .collect(toMap(k -> k.getColor(),
                         v -> 1,
                         Integer::sum));
@@ -161,7 +161,7 @@ public class Streams {
                     .collect(Collectors.groupingBy(Function.identity(), counting()))
                     .entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                     .limit(100)
-                    .collect(LinkedHashMap::new, (m,e) -> m.put(e.getKey(), e.getValue()), Map::putAll);
+                    .collect(LinkedHashMap::new, (m, e) -> m.put(e.getKey(), e.getValue()), Map::putAll);
             System.out.println(wordsCounter);
 
             System.out.println("**********************************************************");

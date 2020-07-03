@@ -1,9 +1,9 @@
-body{
+body {
     margin: 0;
     font-family: arial;
 }
 
-#greybox{
+#greybox {
     display: flex;
     margin: 30px auto;
     width: 90%;
@@ -11,34 +11,34 @@ body{
     background: rgb(206, 206, 206);
 }
 
-form{
+form {
     margin: 30px auto 30px;
     width: 500px;
     height: 450px;
     background: white;
 }
 
-h1{
+h1 {
     font-size: 25px;
     margin: 50px 50px;
 }
 
-label,input{
+label, input {
     margin-top: 10px;
     margin-left: 50px;
     margin-right: 50px;
     display: block;
 }
 
-label{
+label {
     font-size: 70%;
 }
 
-#pass{
-    margin-top:20px;
+#pass {
+    margin-top: 20px;
 }
 
-a{
+a {
     font-size: 70%;
     text-align: right;
     float: right;
@@ -47,18 +47,18 @@ a{
     color: grey;
 }
 
-#user input, #pass input{
-    width:79%;
+#user input, #pass input {
+    width: 79%;
     height: 30px;
     border: 1px solid grey;
 }
 
-#login input{
+#login input {
     margin-top: 60px;
     width: 28%;
 }
 
-#user input:hover, #pass input:hover{
+#user input:hover, #pass input:hover {
     border: 1px solid green;
 }
 

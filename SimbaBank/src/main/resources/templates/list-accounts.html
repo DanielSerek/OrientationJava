@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="@{/style.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Index</th>
+        <th>Name</th>
+        <th>Balance</th>
+        <th>Animal Type</th>
+        <th>Good guy</th>
+    </tr>
+    </thead>
+
+    <!--    /*-->
+    <!--    th:classappend="${account.name=='King Lion'} ? adminclass : userclass-->
+    <!--    */-->
+    <tr th:each="account:${accounts}" th:classappend="${account.name=='King Lion'}? adminclass : userclass">
+        <td th:utext="${accountStat.index+1}"></td>
+        <td th:utext="${account.name}"></td>
+        <td th:utext="${account.balance}"></td>
+        <td th:utext="${account.animalType}"></td>
+        <td th:utext="${account.isGoodGuy()}? 'Good Guy' : 'Bad Guy'"></td>
+    </tr>
+
+    <!--    /*-->
+    <!--    <tr th:each="account:${accounts}">-->
+    <!--        <div th:if="${account.name=='King Lion'}">-->
+    <!--            <td th:utext="${accountStat.index+1}"></td>-->
+    <!--            <td th:utext="'<b>' + ${account.name} + '</b>'"></td>-->
+    <!--            <td th:utext="${account.balance}"></td>-->
+    <!--            <td th:utext="${account.animalType}"></td>-->
+    <!--        </div>-->
+    <!--        <div th:unless="${account.name=='King Lion'}">-->
+    <!--            <td th:utext="${accountStat.index+1}"></td>-->
+    <!--            <td th:utext="${account.name}"></td>-->
+    <!--            <td th:utext="${account.balance}"></td>-->
+    <!--            <td th:utext="${account.animalType}"></td>-->
+    <!--        </div>-->
+    <!--    </tr>-->
+    <!--    */-->
+</table>
+
+</body>
+</html>

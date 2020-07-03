@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Donate</title>
+</head>
+<body>
+
+
+<form th:action="@{/donate}" th:method="POST">
+    <label for="amount">Provide amount</label>
+    <input autofocus required id="amount" name="amount" placeholder="provide donation">
+    <label for="animal">Provide animal</label>
+    <input autofocus required id="animal" name="animal" placeholder="Mickey Mouse">
+    <button type="submit"> SUBMIT</button>
+</form>
+
+</body>
+</html>
