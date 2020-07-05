@@ -19,8 +19,8 @@
     </tr>
     </thead>
     <tr th:each="item:${items}">
-        <td th:text="${item.name()}"></td>
-        <td th:text="${item.description()}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.description}"></td>
         <td class = "centeredtext" th:text="(${item.price}) ? (${item.price}) + ' Kč': ''"></td>
         <td class = "centeredtext" th:text="(${item.quantityOfStock}) ? (${item.quantityOfStock}) : ''"></td>
     </tr>

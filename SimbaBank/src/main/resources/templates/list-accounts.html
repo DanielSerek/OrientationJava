@@ -18,6 +18,7 @@
         <th>Balance</th>
         <th>Animal Type</th>
         <th>Good guy</th>
+        <th>Donate</th>
     </tr>
     </thead>
 
@@ -30,6 +31,7 @@
         <td th:utext="${account.balance}"></td>
         <td th:utext="${account.animalType}"></td>
         <td th:utext="${account.isGoodGuy()}? 'Good Guy' : 'Bad Guy'"></td>
+        <td><a th:href="@{|/donate/${account.name}|}"><button type="button" class="btn btn-outline-warning"> Donate</button> </a></td>
     </tr>
 
     <!--    /*-->

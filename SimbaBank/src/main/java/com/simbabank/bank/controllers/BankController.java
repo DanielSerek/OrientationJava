@@ -5,8 +5,9 @@ import com.simbabank.bank.repositories.Bank;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BankController {
@@ -14,7 +15,7 @@ public class BankController {
 
     @GetMapping("/show")
     public String show(Model model) {
-        BankAccount account1 = new BankAccount("Simba", 2000.01, "lion", true);
+        BankAccount account1 = new BankAccount("Simba", 2000.01, "lion", true, true);
         model.addAttribute("account", account1);
         return "show";
     }
@@ -31,18 +32,27 @@ public class BankController {
         return "list-accounts";
     }
 
-    @GetMapping("donate")
-    public String donateMoney() {
-        return "donate";
-    }
-
-    @PostMapping("donate")
-    public String donate(@RequestParam double amount, @RequestParam String animal) {
+    @GetMapping("donate/{accountName}")
+    public String donate(@PathVariable String accountName) {
         for (BankAccount account : bank.getAccounts()) {
-            if (account.getName().equals(animal)) {
-                account.setBalance(account.getBalance() + amount);
+            if (account.getName().equals(accountName)) {
+                if(account.isKing()) account.setBalance(account.getBalance() + 100);
+                else account.setBalance(account.getBalance() + 10);
             }
         }
+        return "redirect:/list-accounts";
+    }
+
+    @GetMapping("create-account")
+    public String createAccount(){
+        return "create-account";
+    }
+
+    @PostMapping("create-account")
+    public String addBook(@ModelAttribute BankAccount account){
+        if(account.getName().isEmpty() || account.getAnimalType().isEmpty())
+            return "redirect:/list-accounts";
+        bank.addAccount(account);
         return "redirect:/list-accounts";
     }
 }

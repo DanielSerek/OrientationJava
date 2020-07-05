@@ -4,15 +4,19 @@ import java.text.DecimalFormat;
 
 public class BankAccount {
     private String name;
-    private double balance;
+    private Double balance;
     private String animalType;
-    private boolean goodGuy;
+    private Boolean isKing;
+    private Boolean goodGuy;
 
-    public BankAccount(String name, double balance, String animalType, boolean goodGuy) {
+    public BankAccount(String name, Double balance, String animalType, Boolean isKing, Boolean goodGuy) {
         this.name = name;
         this.balance = balance;
         this.animalType = animalType;
-        this.goodGuy = goodGuy;
+        if ((isKing == null)) this.isKing = false;
+        else this.isKing = isKing;
+        if ((goodGuy == null)) this.goodGuy = false;
+        else this.goodGuy = goodGuy;
     }
 
     public String getName() {
@@ -23,7 +27,7 @@ public class BankAccount {
         return goodGuy;
     }
 
-    public void setGoodGuy(boolean goodGuy) {
+    public void setGoodGuy(Boolean goodGuy) {
         this.goodGuy = goodGuy;
     }
 
@@ -36,12 +40,20 @@ public class BankAccount {
         return Double.valueOf(df.format(balance));
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
     public String getAnimalType() {
         return animalType;
+    }
+
+    public boolean isKing() {
+        return isKing;
+    }
+
+    public void setKing(Boolean king) {
+        isKing = king;
     }
 
     public void setAnimalType(String animalType) {

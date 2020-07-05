@@ -94,8 +94,6 @@ public class ShopController {
         return "index";
     }
 
-    // New line
-
 //    @PostMapping("search")
 //    public String searchItem(@RequestParam String searchItem){
 //        searchedItems = items.stream()
