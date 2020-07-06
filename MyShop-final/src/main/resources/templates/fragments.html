@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/index-styles.css" />
+    <title>MyShop</title>
+</head>
+<body>
+
+<div th:fragment="menu">
+    <div class = "navbar">
+        <a href="/only-available">ONLY AVAILABLE</a>
+        <a href="/cheapest-first">CHEAPEST FIRST </a>
+        <a href="/contains-nike">CONTAINS NIKE</a>
+        <a href="/average-stock">AVERAGE STOCK</a>
+        <a href="/most-expensive">MOST EXPENSIVE AVAILABLE</a>
+    </div>
+
+    <div class = "search">
+        <form th:action="@{/search}" th:method="GET" >
+            <label for="searchItem">Search for:</label>
+            <input autofocus required id="searchItem" name="searchItem" placeholder="...something like nike">
+            <button type="searchItem"> Search</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
