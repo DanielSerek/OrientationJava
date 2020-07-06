@@ -2,10 +2,7 @@ package com.myshop.myshop.repositories;
 
 import com.myshop.myshop.models.ShopItem;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.IntSummaryStatistics;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Shop {
@@ -98,10 +95,10 @@ public class Shop {
         } else return listOfItems;
     }
 
-    public List<ShopItem> filterByPrice(List<ShopItem> currentlyDisplayedItems, String condition, int price) {
+    public List<ShopItem> filterByPrice(List<ShopItem> currentlyDisplayedItems, String condition, Integer price) {
         List<ShopItem> filteredItems = new ArrayList<>();
         for (ShopItem item : items) {
-            if (condition.contains("equals") && item.getPrice() == price){
+            if (condition.contains("exactly") && price.equals(Math.round(item.getPrice()))){
                 filteredItems.add(item);
             }
             if (condition.contains("below") && item.getPrice() < price){

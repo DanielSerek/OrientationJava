@@ -21,13 +21,13 @@
         <a href="/original-currency">ORIGINAL CURRENCY</a>
     </div>
 
-    <div class="filter" th:action="@{/price}" th:method="GET">
-        <a href="/filter-by-price/above">ABOVE</a>
-        <a href="/filter-by-price/below">BELOW</a>
-        <a href="/filter-by-price/exactly">EXACTLY</a>
+    <form class="filter" th:action="@{/price}" th:method="GET">
+        <button type="submit" formaction="/filter-by-price/above">ABOVE</button>
+        <button type="submit" formaction="/filter-by-price/below">BELOW</button>
+        <button type="submit" formaction="/filter-by-price/exactly">EXACTLY</button>
         <label class="priceFilter" for="price">Filter by price:</label>
-        <input autofocus required id="price" type="number" name="price" placeholder="...e.g.: 300">
-    </div>
+        <input autofocus required id="price" name="price" placeholder="...e.g.: 300">
+    </form>
 
     <table class="table">
         <thead>
