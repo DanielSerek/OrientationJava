@@ -1,0 +1,12 @@
+2.
+SELECT DISTINCT year FROM movies.movie INNER JOIN movies.rating ON movies.movie.mID = movies.rating.mID WHERE rating.stars = 4 OR rating.stars = 5 order by year asc;
+
+3.
+SELECT DISTINCT title FROM movies.movie WHERE movie.mID NOT IN (SELECT rating.mID FROM movies.rating);
+
+4.
+SELECT DISTINCT name FROM movies.reviewer INNER JOIN movies.rating ON reviewer.rID = rating.rID WHERE rating.ratingDate IS NULL;
+
+5.
+SELECT name, title, stars, ratingDate FROM movies.movie INNER JOIN movies.rating ON movie.mID = rating.mID INNER JOIN movies.reviewer ON rating.rID = reviewer.rID ORDER BY name, title, stars;
+
