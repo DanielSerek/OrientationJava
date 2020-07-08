@@ -27,7 +27,8 @@
         <td th:text="${item.name}"></td>
         <td th:text="${item.type}"></td>
         <td th:text="${item.description}"></td>
-        <td class = "centeredtext" th:text="(${item.price}) ? (${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')} + ((${EUR}) ? ' EUR' : ' Kč')) : ''"></td>
+        <td class = "centeredtext"
+            th:text="(${item.price}) ? (${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')} + ((${EUR}) ? ' EUR' : ' Kč')) : ''"></td>
         <td class = "centeredtext" th:text="(${item.quantityOfStock}) ? (${item.quantityOfStock}) : ''"></td>
     </tr>
 </table>

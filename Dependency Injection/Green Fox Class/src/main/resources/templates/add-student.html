@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+<body>
+<form th:action="@{/add-student}" th:method="POST" >
+    <label for="student">Provide student name</label>
+    <input autofocus required id="student" name="student" placeholder="Provide student name">
+    <button type="submit">SUBMIT</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+<body>
+<table>
+    <tr th:each="student:${students}">
+        <td th:text="${student}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
