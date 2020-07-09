@@ -42,12 +42,29 @@ public class MainController {
         model.addAttribute("loggedName", loggedName);
         model.addAttribute("drinks", Arrays.asList(Drink.values()));
         model.addAttribute("foods", Arrays.asList(Food.values()));
+        model.addAttribute("defaultFood", service.getDefaultFood(name));
+        model.addAttribute("defaultDrink", service.getDefaultDrink(name));
         return "nutrition-store";
     }
 
     @PostMapping("nutritionStore")
     public String changeNutrition(@RequestParam("name") String name, @ModelAttribute("food") String food, @ModelAttribute("drink") String drink, Model model){
         service.changeNutrition(name, food, drink);
+        model.addAttribute("loggedName", loggedName);
+        return "redirect:/index?name=" + name;
+    }
+
+    @GetMapping("trickCenter")
+    public String showTrickCenter(@RequestParam("name") String name, Model model){
+        model.addAttribute("loggedName", loggedName);
+        model.addAttribute("allLearned", service.allSkillsLearned(name));
+        model.addAttribute("tricks", service.getTricks(name));
+        return "trick-center";
+    }
+
+    @PostMapping("trickCenter")
+    public String LearnATrick(@RequestParam("name") String name, @ModelAttribute("trick") String trick, Model model){
+        service.learnATrick(name, trick);
         model.addAttribute("loggedName", loggedName);
         return "redirect:/index?name=" + name;
     }

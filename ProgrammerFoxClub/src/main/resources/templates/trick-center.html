@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<ul>
+    <li><a th:href="'/index?name=' + ${loggedName}">Information</a></li>
+    <li><a th:href="'/nutritionStore?name=' + ${loggedName}">Nutrition Store</a></li>
+    <li><a th:href="'/trickCenter?name=' + ${loggedName}">Trick Center</a></li>
+</ul>
+
+<div th:if="${allLearned}">
+    <p> You are a bloody bastard, there is nothing to learn more!</p>
+</div>
+
+<div th:unless="${allLearned}">
+    <form th:action="'/trickCenter?name=' + ${loggedName}" th:method="post" >
+        <datalist id="tricks">
+            <option th:each="trick : ${tricks}" th:value="${trick}" th:text="${trick}"></option>
+        </datalist>
+        <label for="tricks">Tricks</label>
+        <input list="tricks" required id="trick" name="trick" type="text">
+        <input type="submit" value="Learn">
+    </form>
+</div>
+
+
+</body>
+</html>

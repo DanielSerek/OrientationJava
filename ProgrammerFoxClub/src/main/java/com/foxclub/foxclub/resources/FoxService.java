@@ -1,6 +1,10 @@
 package com.foxclub.foxclub.resources;
 
+import com.foxclub.foxclub.models.Drink;
+import com.foxclub.foxclub.models.Food;
 import com.foxclub.foxclub.models.Fox;
+
+import java.util.List;
 
 public interface FoxService {
     public Fox getAFox(String name);
@@ -8,4 +12,14 @@ public interface FoxService {
     void login(String name);
 
     void changeNutrition(String name, String food, String drink);
+
+    void learnATrick(String name, String trick);
+
+    List<String> getTricks(String name);
+
+    boolean allSkillsLearned(String name);
+
+    Food getDefaultFood(String name);
+
+    Drink getDefaultDrink(String name);
 }
