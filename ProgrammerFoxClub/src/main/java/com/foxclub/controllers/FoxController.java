@@ -1,8 +1,8 @@
-package com.foxclub.foxclub.controllers;
+package com.foxclub.controllers;
 
-import com.foxclub.foxclub.models.Drink;
-import com.foxclub.foxclub.models.Food;
-import com.foxclub.foxclub.services.FoxService;
+import com.foxclub.models.Drink;
+import com.foxclub.models.Food;
+import com.foxclub.services.FoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,40 +13,25 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 @Controller
-public class MainController {
+public class FoxController {
 
     @Autowired
     private FoxService service;
     private static String loggedName;
-    boolean userExists = true;
 
     @RequestMapping(value = {"index"}, method = RequestMethod.GET)
     public String getIndex(@RequestParam(value = "name", required = false, defaultValue = "none") String name, Model model){
-        if(!name.equals(loggedName) || name.equals("none")) {
-            return "login";
+        if(service.checkUserExists(name)){
+            loggedName=name;
         }
+        else return "login";
+//        if(!name.equals(loggedName) || name.equals("none")) {
+//            return "login";
+//        }
         model.addAttribute("fox", service.getAFox(name));
         model.addAttribute("loggedName", loggedName);
         model.addAttribute("logs", service.getLogs(name).stream().sorted(Comparator.reverseOrder()).limit(5).collect(Collectors.toList()));
         return "index";
-    }
-
-    @GetMapping("login")
-    public String showLoginScreen(Model model){
-        model.addAttribute("userExists", userExists);
-        return "login";
-    }
-
-    @PostMapping("login")
-    public String userLogin(@RequestParam(value = "name") String name, Model model){
-        userExists = service.checkUserExists(name);
-        if(!userExists){
-            return "login";
-        }
-        loggedName = name;
-        model.addAttribute("userExists", userExists);
-        model.addAttribute("loggedName", loggedName);
-        return "redirect:/index?name=" + name;
     }
 
     @GetMapping("nutritionStore")
@@ -96,5 +81,4 @@ public class MainController {
         model.addAttribute("logs", service.getLogs(name));
         return "action-history";
     }
-
 }

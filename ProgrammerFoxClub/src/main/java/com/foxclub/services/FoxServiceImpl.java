@@ -1,18 +1,18 @@
-package com.foxclub.foxclub.services;
+package com.foxclub.services;
 
-import com.foxclub.foxclub.models.Drink;
-import com.foxclub.foxclub.models.Food;
-import com.foxclub.foxclub.models.Fox;
-import com.foxclub.foxclub.repository.FoxDatabase;
+import com.foxclub.models.Drink;
+import com.foxclub.models.Food;
+import com.foxclub.models.Fox;
+import com.foxclub.repository.FoxDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FoxServiceImpl implements FoxService{
@@ -21,12 +21,7 @@ public class FoxServiceImpl implements FoxService{
     private FoxDatabase database;
 
     public Fox getAFox(String name){
-        for (Fox fox : database.getFoxList()) {
-            if(fox.getName().equals(name)){
-                return fox;
-            }
-        }
-        return null;
+        return database.getFoxList().stream().filter(x -> x.getName().equals(name)).findFirst().orElse(null);
     }
 
     public boolean checkUserExists(String name) {
@@ -65,44 +60,48 @@ public class FoxServiceImpl implements FoxService{
     }
 
     public List<String> getTricks(String name) {
-        List<String> newTricks = new ArrayList<>();
-        for (String trick : database.getTricks()) {
-            if(!getAFox(name).getTricks().contains(trick)){
-                newTricks.add(trick);
-            }
-        }
-        return newTricks;
+        List<String> unavailable = database.getTricks().stream()
+                .filter(e -> (getAFox(name).getTricks().stream()
+                        .filter(d -> d.equals(e))
+                        .count())<1)
+                .collect(Collectors.toList());
+
+//        List<String> newTricks = new ArrayList();
+//        for (String trick : database.getTricks()) {
+//            if(!getAFox(name).getTricks().contains(trick)){
+//                newTricks.add(trick);
+//            }
+//        }
+        return unavailable;
     }
 
     public boolean allSkillsLearned(String name) {
-        for (String trick : database.getTricks()) {
-            for (int i = 0; i < getAFox(name).getTricks().size(); i++) {
-                if(!getAFox(name).getTricks().contains(trick)) return false;
-            }
-        }
-        return true;
+//        for (String trick : database.getTricks()) {
+//            for (int i = 0; i < getAFox(name).getTricks().size(); i++) {
+//                if(!getAFox(name).getTricks().contains(trick)) return false;
+//            }
+//        }
+//        return true;
+        return database.getTricks().stream().allMatch(getAFox(name).getTricks()::contains);
     }
 
     public Food getDefaultFood(String name) {
-        Fox fox = getAFox(name);
-        if(fox.getName().equals(name)){
-            return fox.getFood();
+        if(getAFox(name).getName().equals(name)){
+            return getAFox(name).getFood();
         }
         return null;
     }
 
     public Drink getDefaultDrink(String name) {
-        Fox fox = getAFox(name);
-        if(fox.getName().equals(name)){
-            return fox.getDrink();
+        if(getAFox(name).getName().equals(name)){
+            return getAFox(name).getDrink();
         }
         return null;
     }
 
     public List<String> getLogs(String name) {
-        Fox fox = getAFox(name);
-        if(fox.getName().equals(name)){
-            return fox.getLogs();
+        if(getAFox(name).getName().equals(name)){
+            return getAFox(name).getLogs();
         }
         return null;
     }

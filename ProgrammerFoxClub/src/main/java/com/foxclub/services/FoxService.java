@@ -1,8 +1,8 @@
-package com.foxclub.foxclub.services;
+package com.foxclub.services;
 
-import com.foxclub.foxclub.models.Drink;
-import com.foxclub.foxclub.models.Food;
-import com.foxclub.foxclub.models.Fox;
+import com.foxclub.models.Drink;
+import com.foxclub.models.Food;
+import com.foxclub.models.Fox;
 
 import java.util.List;
 

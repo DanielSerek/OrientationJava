@@ -1,4 +1,4 @@
-package com.foxclub.foxclub.models;
+package com.foxclub.models;
 
 public enum  Food {
     Steaks,

@@ -1,4 +1,4 @@
-package com.foxclub.foxclub.models;
+package com.foxclub.models;
 
 import java.util.ArrayList;
 import java.util.List;

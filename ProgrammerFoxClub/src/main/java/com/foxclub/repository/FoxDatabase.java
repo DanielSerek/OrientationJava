@@ -1,8 +1,8 @@
-package com.foxclub.foxclub.repository;
+package com.foxclub.repository;
 
-import com.foxclub.foxclub.models.Drink;
-import com.foxclub.foxclub.models.Food;
-import com.foxclub.foxclub.models.Fox;
+import com.foxclub.models.Drink;
+import com.foxclub.models.Food;
+import com.foxclub.models.Fox;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
