@@ -7,9 +7,9 @@ import com.foxclub.foxclub.models.Fox;
 import java.util.List;
 
 public interface FoxService {
-    public Fox getAFox(String name);
+    Fox getAFox(String name);
 
-    void login(String name);
+    boolean checkUserExists(String name);
 
     void changeNutrition(String name, String food, String drink);
 
@@ -22,4 +22,6 @@ public interface FoxService {
     Food getDefaultFood(String name);
 
     Drink getDefaultDrink(String name);
+
+    List<String> getLogs(String name);
 }

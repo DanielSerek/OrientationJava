@@ -12,5 +12,8 @@
     <input required id="name" name="name" type="text">
     <input type="submit" value="GO">
 </form>
+<div th:unless="${userExists}">
+    <p style="color:red">The user does not exist.</p>
+</div>
 </body>
 </html>

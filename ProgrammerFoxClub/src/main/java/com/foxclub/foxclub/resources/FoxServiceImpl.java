@@ -7,7 +7,11 @@ import com.foxclub.foxclub.repository.FoxDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,27 +29,37 @@ public class FoxServiceImpl implements FoxService{
         return null;
     }
 
-    public void login(String name) {
-        if(getAFox(name)==null){
-            database.addFox(new Fox(name, null, Food.Pasta, Drink.Beer));
+    public boolean checkUserExists(String name) {
+        if(getAFox(name) != null){
+            if (getAFox(name).getName().equals(name)) {
+                return true;
+            }
         }
+        return false;
     }
 
     public void changeNutrition(String name, String food, String drink) {
-        for (Fox fox : database.getFoxList()) {
-            if(fox.getName().equals(name)){
-                fox.setFood(Food.valueOf(food));
-                fox.setDrink(Drink.valueOf(drink));
+        Fox fox = getAFox(name);
+        if(fox.getName().equals(name)){
+            Food previousFood = fox.getFood();
+            fox.setFood(Food.valueOf(food));
+            if(previousFood != Food.valueOf(food)){
+                fox.addLog(getTimeStamp() + " : Food has been changed from: " + previousFood.toString() + " to: " + food);
+            }
+            Drink previousDrink = fox.getDrink();
+            fox.setDrink(Drink.valueOf(drink));
+            if(previousDrink != Drink.valueOf(drink)){
+                fox.addLog(getTimeStamp() + " : Drink has been changed from: " + previousDrink.toString() + " to: " + drink);
             }
         }
     }
 
     public void learnATrick(String name, String trick) {
-        for (Fox fox : database.getFoxList()) {
-            if(fox.getName().equals(name)){
-                if(!(fox.getTricks().contains(trick))){
-                    fox.addTrick(trick);
-                }
+        Fox fox = getAFox(name);
+        if(fox.getName().equals(name)){
+            if(!(fox.getTricks().contains(trick))){
+                fox.addTrick(trick);
+                fox.addLog(getTimeStamp() + " : Learned to: " + trick);
             }
         }
     }
@@ -70,20 +84,33 @@ public class FoxServiceImpl implements FoxService{
     }
 
     public Food getDefaultFood(String name) {
-        for (Fox fox : database.getFoxList()) {
-            if(fox.getName().equals(name)){
-                return fox.getFood();
-            }
+        Fox fox = getAFox(name);
+        if(fox.getName().equals(name)){
+            return fox.getFood();
         }
         return null;
     }
 
     public Drink getDefaultDrink(String name) {
-        for (Fox fox : database.getFoxList()) {
-            if(fox.getName().equals(name)){
-                return fox.getDrink();
-            }
+        Fox fox = getAFox(name);
+        if(fox.getName().equals(name)){
+            return fox.getDrink();
         }
         return null;
+    }
+
+    public List<String> getLogs(String name) {
+        Fox fox = getAFox(name);
+        if(fox.getName().equals(name)){
+            return fox.getLogs();
+        }
+        return null;
+    }
+
+    private String getTimeStamp() {
+        String pattern = "yyyy. MMMM dd. HH:mm:ss";
+        DateFormat df = new SimpleDateFormat(pattern);
+        Date today = Calendar.getInstance().getTime();
+        return df.format(today);
     }
 }

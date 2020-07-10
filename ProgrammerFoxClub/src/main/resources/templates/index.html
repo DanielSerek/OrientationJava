@@ -8,7 +8,8 @@
 <ul>
     <li><a th:href="'/index?name=' + ${loggedName}">Information</a></li>
     <li><a th:href="'/nutritionStore?name=' + ${loggedName}">Nutrition Store</a></li>
-    <li><a th:href="'/trickCenter?name=' + ${loggedName}">Trick Center</a></li></ul>
+    <li><a th:href="'/trickCenter?name=' + ${loggedName}">Trick Center</a></li>
+    <li><a th:href="'/actionHistory?name=' + ${loggedName}">Action History</a></li>
 
 <img src="greenfox.png" alt="Green Fox">
 
@@ -23,6 +24,15 @@
 
 <div th:unless="${fox.tricks != null}">
     <p>You know no tricks, yet. Go and learn some.</p>
+</div>
+
+    <br>
+    <h1>Action History</h1>
+
+<div>
+    <ul th:each="log:${logs}">
+        <li th:text="${log}"></li>
+    </ul>
 </div>
 
 </body>
