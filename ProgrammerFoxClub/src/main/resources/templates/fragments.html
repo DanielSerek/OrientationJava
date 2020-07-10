@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragments</title>
+</head>
+
+<body>
+<div th:fragment ="links (loggedName)">
+    <ul>
+        <li><a th:href="'/index?name=' + ${loggedName}">Information</a></li>
+        <li><a th:href="'/nutritionStore?name=' + ${loggedName}">Nutrition Store</a></li>
+        <li><a th:href="'/trickCenter?name=' + ${loggedName}">Trick Center</a></li>
+        <li><a th:href="'/actionHistory?name=' + ${loggedName}">Action History</a></li>
+    </ul>
+</div>
+</body>
+</html>

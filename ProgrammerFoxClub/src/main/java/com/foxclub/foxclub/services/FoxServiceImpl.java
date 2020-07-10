@@ -1,4 +1,4 @@
-package com.foxclub.foxclub.resources;
+package com.foxclub.foxclub.services;
 
 import com.foxclub.foxclub.models.Drink;
 import com.foxclub.foxclub.models.Food;

@@ -6,12 +6,7 @@
 
 <body>
 
-<ul>
-    <li><a th:href="'/index?name=' + ${loggedName}">Information</a></li>
-    <li><a th:href="'/nutritionStore?name=' + ${loggedName}">Nutrition Store</a></li>
-    <li><a th:href="'/trickCenter?name=' + ${loggedName}">Trick Center</a></li>
-    <li><a th:href="'/actionHistory?name=' + ${loggedName}">Action History</a></li>
-</ul>
+<div th:replace="fragments :: links (${loggedName})"></div>
 
 <img src="greenfox.png" alt="Green Fox">
 

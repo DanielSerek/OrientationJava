@@ -2,7 +2,7 @@ package com.foxclub.foxclub.controllers;
 
 import com.foxclub.foxclub.models.Drink;
 import com.foxclub.foxclub.models.Food;
-import com.foxclub.foxclub.resources.FoxService;
+import com.foxclub.foxclub.services.FoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
