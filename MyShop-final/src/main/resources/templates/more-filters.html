@@ -3,50 +3,51 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/more-filters-styles.css" />
+    <link rel="stylesheet" href="/more-filters-styles.css"/>
     <title>Title</title>
 </head>
 
-<header class = "header">
+<header class="header">
     <a href="/only-available"><h1>My Shop</h1></a>
     <a href="/more-filters"><h1>More>></h1></a>
 </header>
 
 <body>
-    <div class = "navbar">
-        <a href="/filter-by-type/clothes-and-shoes">CLOTHES AND SHOES</a>
-        <a href="/filter-by-type/electronics">ELECTRONICS</a>
-        <a href="/filter-by-type/beverages-and-snacks">BEVERAGES AND SNACKS</a>
-        <a href="/price-in-eur">EURO</a>
-        <a href="/original-currency">ORIGINAL CURRENCY</a>
-    </div>
+<div class="navbar">
+    <a href="/filter-by-type/clothes-and-shoes">CLOTHES AND SHOES</a>
+    <a href="/filter-by-type/electronics">ELECTRONICS</a>
+    <a href="/filter-by-type/beverages-and-snacks">BEVERAGES AND SNACKS</a>
+    <a href="/price-in-eur">EURO</a>
+    <a href="/original-currency">ORIGINAL CURRENCY</a>
+</div>
 
-    <form class="filter" th:action="@{/price}" th:method="GET">
-        <button type="submit" formaction="/filter-by-price/above">ABOVE</button>
-        <button type="submit" formaction="/filter-by-price/below">BELOW</button>
-        <button type="submit" formaction="/filter-by-price/exactly">EXACTLY</button>
-        <label class="priceFilter" for="price">Filter by price:</label>
-        <input autofocus required id="price" name="price" placeholder="...e.g.: 300">
-    </form>
+<form class="filter" th:action="@{/price}" th:method="GET">
+    <button type="submit" formaction="/filter-by-price/above">ABOVE</button>
+    <button type="submit" formaction="/filter-by-price/below">BELOW</button>
+    <button type="submit" formaction="/filter-by-price/exactly">EXACTLY</button>
+    <label class="priceFilter" for="price">Filter by price:</label>
+    <input autofocus required id="price" name="price" placeholder="...e.g.: 300">
+</form>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Quantity of stock</th>
-        </tr>
-        </thead>
-        <tr th:each="item:${items}">
-            <td th:text="${item.name}"></td>
-            <td th:text="${item.type}"></td>
-            <td th:text="${item.description}"></td>
-            <td class = "centeredtext" th:text="(${item.price}) ? (${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')} + ((${EUR}) ? ' EUR' : ' Kč')) : ''"></td>
-            <td class = "centeredtext" th:text="(${item.quantityOfStock}) ? (${item.quantityOfStock}) : ''"></td>
-        </tr>
-    </table>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity of stock</th>
+    </tr>
+    </thead>
+    <tr th:each="item:${items}">
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.type}"></td>
+        <td th:text="${item.description}"></td>
+        <td class="centeredtext"
+            th:text="(${item.price}) ? (${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')} + ((${EUR}) ? ' EUR' : ' Kč')) : ''"></td>
+        <td class="centeredtext" th:text="(${item.quantityOfStock}) ? (${item.quantityOfStock}) : ''"></td>
+    </tr>
+</table>
 </body>
 
 </html>

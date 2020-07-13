@@ -13,6 +13,7 @@ public class TaskFileWriter {
     public TaskFileWriter(String filename) {
         this.filename = filename;
     }
+
     public void writeTasks(List<Task> tasks) {
         try {
             Files.write(Paths.get(filename), serializeTasks(tasks));

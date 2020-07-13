@@ -22,7 +22,7 @@ public class Bank {
         return accounts;
     }
 
-    public void addAccount(BankAccount account){
+    public void addAccount(BankAccount account) {
         this.accounts.add(account);
     }
 }

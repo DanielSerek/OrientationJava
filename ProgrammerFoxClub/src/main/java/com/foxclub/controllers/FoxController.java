@@ -20,11 +20,10 @@ public class FoxController {
     private static String loggedName;
 
     @RequestMapping(value = {"index"}, method = RequestMethod.GET)
-    public String getIndex(@RequestParam(value = "name", required = false, defaultValue = "none") String name, Model model){
-        if(service.checkUserExists(name)){
-            loggedName=name;
-        }
-        else return "login";
+    public String getIndex(@RequestParam(value = "name", required = false, defaultValue = "none") String name, Model model) {
+        if (service.checkUserExists(name)) {
+            loggedName = name;
+        } else return "login";
 //        if(!name.equals(loggedName) || name.equals("none")) {
 //            return "login";
 //        }
@@ -35,8 +34,8 @@ public class FoxController {
     }
 
     @GetMapping("nutritionStore")
-    public String showNutritionStore(@RequestParam(value = "name", required = false, defaultValue = "none") String name, Model model){
-        if(!name.equals(loggedName) || name.equals("none")) {
+    public String showNutritionStore(@RequestParam(value = "name", required = false, defaultValue = "none") String name, Model model) {
+        if (!name.equals(loggedName) || name.equals("none")) {
             return "login";
         }
         model.addAttribute("loggedName", loggedName);
@@ -48,15 +47,15 @@ public class FoxController {
     }
 
     @PostMapping("nutritionStore")
-    public String changeNutrition(@RequestParam String name, @ModelAttribute("food") String food, @ModelAttribute("drink") String drink, Model model){
+    public String changeNutrition(@RequestParam String name, @ModelAttribute("food") String food, @ModelAttribute("drink") String drink, Model model) {
         service.changeNutrition(name, food, drink);
         model.addAttribute("loggedName", loggedName);
         return "redirect:/index?name=" + name;
     }
 
     @GetMapping("trickCenter")
-    public String showTrickCenter(@RequestParam(value = "name", required = false, defaultValue = "none") String name, Model model){
-        if(!name.equals(loggedName) || name.equals("none")) {
+    public String showTrickCenter(@RequestParam(value = "name", required = false, defaultValue = "none") String name, Model model) {
+        if (!name.equals(loggedName) || name.equals("none")) {
             return "login";
         }
         model.addAttribute("loggedName", loggedName);
@@ -66,15 +65,15 @@ public class FoxController {
     }
 
     @PostMapping("trickCenter")
-    public String LearnATrick(@RequestParam String name, @ModelAttribute("trick") String trick, Model model){
+    public String LearnATrick(@RequestParam String name, @ModelAttribute("trick") String trick, Model model) {
         service.learnATrick(name, trick);
         model.addAttribute("loggedName", loggedName);
         return "redirect:/index?name=" + name;
     }
 
     @GetMapping("actionHistory")
-    public String showActionHistory(@RequestParam(value = "name", required = false, defaultValue = "none") String name, Model model){
-        if(!name.equals(loggedName) || name.equals("none")) {
+    public String showActionHistory(@RequestParam(value = "name", required = false, defaultValue = "none") String name, Model model) {
+        if (!name.equals(loggedName) || name.equals("none")) {
             return "login";
         }
         model.addAttribute("loggedName", loggedName);

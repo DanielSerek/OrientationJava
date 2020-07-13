@@ -10,14 +10,14 @@ import java.util.List;
 //@Component - Controller is a Component
 public class TaskController {
 
-  private final TaskService taskService;
+    private final TaskService taskService;
 
-  public TaskController(TaskService taskService) {
-    this.taskService = taskService;
-  }
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
-  @GetMapping("/todos")
-  public List<Task> getAll() {
-    return taskService.listAllTasks();
-  }
+    @GetMapping("/todos")
+    public List<Task> getAll() {
+        return taskService.listAllTasks();
+    }
 }

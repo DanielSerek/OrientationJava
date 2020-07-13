@@ -14,23 +14,22 @@ public class UtilitiesController {
     private UtilityServicesIF service;
 
     @GetMapping("useful")
-    public String useful(){
+    public String useful() {
         return "useful";
     }
 
     @GetMapping("useful/colored")
-    public String coloredPage(Model model){
+    public String coloredPage(Model model) {
         model.addAttribute("color", service.randomColor());
         return "blank";
     }
 
     @GetMapping("useful/email")
-    public String email(@RequestParam (required = true) String email, Model model){
+    public String email(@RequestParam(required = true) String email, Model model) {
         String color;
-        if(service.validateEmail(email)){
+        if (service.validateEmail(email)) {
             color = "green";
-        }
-        else color = "red";
+        } else color = "red";
 
         model.addAttribute("color", color);
         model.addAttribute("email", email);
@@ -38,13 +37,13 @@ public class UtilitiesController {
     }
 
     @GetMapping("useful/encoder")
-    public String encoder(@RequestParam (required = true) String text, @RequestParam (required = true) int num, Model model){
+    public String encoder(@RequestParam(required = true) String text, @RequestParam(required = true) int num, Model model) {
         model.addAttribute("text", service.caesar(text, num));
         return "useful";
     }
 
     @GetMapping("useful/decoder")
-    public String decoder(@RequestParam (required = true) String text, @RequestParam (required = true) int num, Model model){
+    public String decoder(@RequestParam(required = true) String text, @RequestParam(required = true) int num, Model model) {
         model.addAttribute("text", service.caesar(text, num));
         return "useful";
     }

@@ -15,17 +15,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class FoxServiceImpl implements FoxService{
+public class FoxServiceImpl implements FoxService {
 
     @Autowired
     private FoxDatabase database;
 
-    public Fox getAFox(String name){
+    public Fox getAFox(String name) {
         return database.getFoxList().stream().filter(x -> x.getName().equals(name)).findFirst().orElse(null);
     }
 
     public boolean checkUserExists(String name) {
-        if(getAFox(name) != null){
+        if (getAFox(name) != null) {
             if (getAFox(name).getName().equals(name)) {
                 return true;
             }
@@ -35,15 +35,15 @@ public class FoxServiceImpl implements FoxService{
 
     public void changeNutrition(String name, String food, String drink) {
         Fox fox = getAFox(name);
-        if(fox.getName().equals(name)){
+        if (fox.getName().equals(name)) {
             Food previousFood = fox.getFood();
             fox.setFood(Food.valueOf(food));
-            if(previousFood != Food.valueOf(food)){
+            if (previousFood != Food.valueOf(food)) {
                 fox.addLog(getTimeStamp() + " : Food has been changed from: " + previousFood.toString() + " to: " + food);
             }
             Drink previousDrink = fox.getDrink();
             fox.setDrink(Drink.valueOf(drink));
-            if(previousDrink != Drink.valueOf(drink)){
+            if (previousDrink != Drink.valueOf(drink)) {
                 fox.addLog(getTimeStamp() + " : Drink has been changed from: " + previousDrink.toString() + " to: " + drink);
             }
         }
@@ -51,8 +51,8 @@ public class FoxServiceImpl implements FoxService{
 
     public void learnATrick(String name, String trick) {
         Fox fox = getAFox(name);
-        if(fox.getName().equals(name)){
-            if(!(fox.getTricks().contains(trick))){
+        if (fox.getName().equals(name)) {
+            if (!(fox.getTricks().contains(trick))) {
                 fox.addTrick(trick);
                 fox.addLog(getTimeStamp() + " : Learned to: " + trick);
             }
@@ -63,7 +63,7 @@ public class FoxServiceImpl implements FoxService{
         List<String> unavailable = database.getTricks().stream()
                 .filter(e -> (getAFox(name).getTricks().stream()
                         .filter(d -> d.equals(e))
-                        .count())<1)
+                        .count()) < 1)
                 .collect(Collectors.toList());
 
 //        List<String> newTricks = new ArrayList();
@@ -86,21 +86,21 @@ public class FoxServiceImpl implements FoxService{
     }
 
     public Food getDefaultFood(String name) {
-        if(getAFox(name).getName().equals(name)){
+        if (getAFox(name).getName().equals(name)) {
             return getAFox(name).getFood();
         }
         return null;
     }
 
     public Drink getDefaultDrink(String name) {
-        if(getAFox(name).getName().equals(name)){
+        if (getAFox(name).getName().equals(name)) {
             return getAFox(name).getDrink();
         }
         return null;
     }
 
     public List<String> getLogs(String name) {
-        if(getAFox(name).getName().equals(name)){
+        if (getAFox(name).getName().equals(name)) {
             return getAFox(name).getLogs();
         }
         return null;

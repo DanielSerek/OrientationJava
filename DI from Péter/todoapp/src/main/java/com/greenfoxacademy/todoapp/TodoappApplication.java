@@ -10,26 +10,26 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@ComponentScan
 public class TodoappApplication implements CommandLineRunner {
 
-  private final TodoApp app;
+    private final TodoApp app;
 
-  public TodoappApplication(TodoApp app) {
-    this.app = app;
-  }
+    public TodoappApplication(TodoApp app) {
+        this.app = app;
+    }
 
-  public static void main(String[] args) {
-    SpringApplication.run(TodoappApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(TodoappApplication.class, args);
+    }
 
 
-  @Override
-  public void run(String... args) throws Exception {
+    @Override
+    public void run(String... args) throws Exception {
 //    TaskService taskService = createDependencies();
 
 //    TodoApp app = new TodoApp(taskService);
-    app.run(args);
-  }
+        app.run(args);
+    }
 
-  // Spring creates all this automatically
+    // Spring creates all this automatically
 //  private static TaskService createDependencies() {
 //    String filename = "todo.txt";
 //

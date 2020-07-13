@@ -36,7 +36,7 @@ public class BankController {
     public String donate(@PathVariable String accountName) {
         for (BankAccount account : bank.getAccounts()) {
             if (account.getName().equals(accountName)) {
-                if(account.isKing()) account.setBalance(account.getBalance() + 100);
+                if (account.isKing()) account.setBalance(account.getBalance() + 100);
                 else account.setBalance(account.getBalance() + 10);
             }
         }
@@ -44,13 +44,13 @@ public class BankController {
     }
 
     @GetMapping("create-account")
-    public String createAccount(){
+    public String createAccount() {
         return "create-account";
     }
 
     @PostMapping("create-account")
-    public String addBook(@ModelAttribute BankAccount account){
-        if(account.getName().isEmpty() || account.getAnimalType().isEmpty())
+    public String addBook(@ModelAttribute BankAccount account) {
+        if (account.getName().isEmpty() || account.getAnimalType().isEmpty())
             return "redirect:/list-accounts";
         bank.addAccount(account);
         return "redirect:/list-accounts";

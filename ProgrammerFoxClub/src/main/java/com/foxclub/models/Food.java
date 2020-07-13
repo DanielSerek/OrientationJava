@@ -1,6 +1,6 @@
 package com.foxclub.models;
 
-public enum  Food {
+public enum Food {
     Steaks,
     Sushi,
     Pasta,

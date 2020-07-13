@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class UtilityService implements UtilityServicesIF{
+public class UtilityService implements UtilityServicesIF {
 
     private List<String> colors;
     private Random random;
@@ -26,11 +26,10 @@ public class UtilityService implements UtilityServicesIF{
         return colors.get(random.nextInt(colors.size()));
     }
 
-    public boolean validateEmail(String email){
-        if(email.contains("@") && email.contains(".")){
+    public boolean validateEmail(String email) {
+        if (email.contains("@") && email.contains(".")) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     public String caesar(String text, int number) {

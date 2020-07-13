@@ -17,15 +17,15 @@ public class LoginController {
     boolean userExists = true;
 
     @GetMapping("login")
-    public String showLoginScreen(Model model){
+    public String showLoginScreen(Model model) {
         model.addAttribute("userExists", userExists);
         return "login";
     }
 
     @PostMapping("login")
-    public String userLogin(@RequestParam(value = "name") String name, Model model){
+    public String userLogin(@RequestParam(value = "name") String name, Model model) {
         userExists = service.checkUserExists(name);
-        if(!userExists){
+        if (!userExists) {
             return "login";
         }
         loggedName = name;

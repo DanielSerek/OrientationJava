@@ -4,5 +4,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TaskFileConfiguration {
-  public String filename = "todo.txt";
+    public String filename = "todo.txt";
 }

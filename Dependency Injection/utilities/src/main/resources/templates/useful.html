@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"><head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
     </head>
 <body>
-    <a href="/useful/colored">Colored Background</a><br>
-    <a href="/useful/email/?email=is@this.valid">Email validator</a><br>
-    <a href="/useful/encoder/?text=Ahoj&&num=6">Caesar encoder</a><br>
-    <a href="/useful/decoder/?text=Gnup&&num=-6">Caesar decoder</a><br>
-    <br>
-    <br>
+<a href="/useful/colored">Colored Background</a><br>
+<a href="/useful/email/?email=is@this.valid">Email validator</a><br>
+<a href="/useful/encoder/?text=Ahoj&&num=6">Caesar encoder</a><br>
+<a href="/useful/decoder/?text=Gnup&&num=-6">Caesar decoder</a><br>
+<br>
+<br>
 <h1 th:utext="${text}"></h1>
 </body>
 </html>

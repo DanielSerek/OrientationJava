@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<div th:fragment ="links (loggedName)">
+<div th:fragment="links (loggedName)">
     <ul>
         <li><a th:href="'/index?name=' + ${loggedName}">Information</a></li>
         <li><a th:href="'/nutritionStore?name=' + ${loggedName}">Nutrition Store</a></li>

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class StudentService implements ClassServicesIF{
+public class StudentService implements ClassServicesIF {
     private List<String> names;
 
     public StudentService() {
@@ -24,14 +24,13 @@ public class StudentService implements ClassServicesIF{
         names.add(student);
     }
 
-    public int count(){
+    public int count() {
         return names.size();
     }
 
     public boolean checkStudent(String name) {
-        if(names.contains(name)){
+        if (names.contains(name)) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 }

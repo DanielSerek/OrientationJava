@@ -16,6 +16,7 @@ public class TaskFileWriter {
     public TaskFileWriter(TaskFileConfiguration fileConfiguration) {
         this.fileConfiguration = fileConfiguration;
     }
+
     public void writeTasks(List<Task> tasks) {
         try {
             Files.write(Paths.get(fileConfiguration.filename), serializeTasks(tasks));

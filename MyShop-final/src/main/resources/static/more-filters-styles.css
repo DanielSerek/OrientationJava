@@ -1,5 +1,5 @@
 /* Add a black background color to the top navigation */
-body{
+body {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
@@ -13,7 +13,7 @@ a {
     color: black;
 }
 
-a:visited{
+a:visited {
     text-decoration: none;
 }
 
@@ -25,7 +25,7 @@ a:visited{
     margin: 0px 0px 20px;
 }
 
-.filter{
+.filter {
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -33,7 +33,7 @@ a:visited{
     margin: 0px 0px 20px;
 }
 
-.filter button{
+.filter button {
     background-color: #333;
     margin: 0px 15px;
     border: none;
@@ -45,13 +45,13 @@ a:visited{
     font-size: 16px;
 }
 
-.filter input{
+.filter input {
     height: 40px;
     width: 70%;
     font-size: 120%;
 }
 
-label.priceFilter{
+label.priceFilter {
     text-align: center;
 }
 
@@ -77,11 +77,11 @@ label.priceFilter{
     color: white;
 }
 
-.table{
+.table {
     width: 100%;
 }
 
-.table th{
+.table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
@@ -89,8 +89,10 @@ label.priceFilter{
     color: white;
 }
 
-tr:nth-child(even) {background: #CCC}
+tr:nth-child(even) {
+    background: #CCC
+}
 
-.centeredtext{
+.centeredtext {
     text-align: center;
 }

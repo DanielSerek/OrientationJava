@@ -12,30 +12,30 @@ public class ClassController {
     private ClassServicesIF service;
 
     @GetMapping("gfa")
-    public String index(Model model){
+    public String index(Model model) {
         model.addAttribute("count", service.count());
         return "gfa";
     }
 
     @GetMapping("gfa/list")
-    public String listAllStudents(Model model){
+    public String listAllStudents(Model model) {
         model.addAttribute("students", service.findAll());
         return "list";
     }
 
     @GetMapping("gfa/add")
-    public String addStudentPage(){
+    public String addStudentPage() {
         return "add-student";
     }
 
     @PostMapping("add-student")
-    public String addStudentToTheList(@ModelAttribute("student") String student){
+    public String addStudentToTheList(@ModelAttribute("student") String student) {
         service.save(student);
         return "redirect:/gfa/list";
     }
 
     @GetMapping("gfa/check")
-    public String checkStuden(){
+    public String checkStuden() {
         return "check-student";
     }
 
