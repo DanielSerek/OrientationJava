@@ -2,28 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List Books</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>List Tasks</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
 
 <h1>TODOs for today:</h1>
-<table>
+
+<div class="search">
+    <form th:action="@{/search}" th:method="GET">
+        <label for="searchItem">Search for:</label>
+        <input autofocus id="searchItem" name="searchItem">
+        <button type="searchItem"> Search</button>
+    </form>
+</div>
+
+<table class="table table-hover">
     <thead>
     <tr>
-        <th>Id</th>
+        <th >Id</th>
         <th>Content</th>
+        <th>Created</th>
         <th>Urgent</th>
         <th>Done</th>
+        <th>Delete</th>
+        <th>Edit</th>
     </tr>
     </thead>
 
     <tr th:each="todo:${todos}">
         <td th:text="${todo.id}"></td>
         <td th:text="${todo.title}"></td>
+        <td th:text="${todo.timeStamp}"></td>
         <td th:text="${todo.urgent}"></td>
         <td th:text="${todo.done}"></td>
+        <td><a th:href="@{|/delete-task/${todo.id}|}"><button type="button" class="btn btn-outline-warning">Delete</button> </a></td>
+        <td><a th:href="@{|${todo.id}/edit|}"><button type="button" class="btn btn-outline-warning">Edit</button> </a></td>
     </tr>
 </table>
 

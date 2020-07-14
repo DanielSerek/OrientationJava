@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit a task</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<h1>Edit a task</h1>
+<form th:action="'/edit-task?id='+${task.id}" th:method="POST" >
+    <label for="title">Provide title</label>
+    <input autofocus required id="title" name="title" th:value="${task.title}">
+
+    <label for="isUrgent">Urgent?</label>
+    <input type="checkbox" id="isUrgent" name="urgent" th:checked="${task.urgent}">
+
+    <label for="isDone">Completed?</label>
+    <input type="checkbox" id="isDone" name="done" th:checked="${task.done}">
+    <button type="submit"> SUBMIT</button>
+</form>
+
+</body>
+</html>

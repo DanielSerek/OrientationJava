@@ -22,7 +22,9 @@ public class ConnectionApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        todoService.createTask("Go to shop", true, false);
+        todoService.createTask("Go to the shop", true, false);
         todoService.createTask("Get some sleep", false, false);
+        todoService.createTask("Practise coding", true, false);
+        todoService.createTask("Kill the neighbour", true, true);
     }
 }
