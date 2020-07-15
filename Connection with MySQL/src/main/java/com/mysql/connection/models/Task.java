@@ -20,7 +20,7 @@ public class Task {
     private boolean urgent;
     private boolean done;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dueDate;
 
     @ManyToOne
@@ -62,12 +62,12 @@ public class Task {
         this.description = description;
     }
 
-    public String getDueDate() {
+    public String getDueDateString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy HH:mm:ss");
         return dueDate.format(formatter);
     }
 
-    public LocalDateTime getDueDateDateFormat(){
+    public LocalDateTime getDueDate(){
         return dueDate;
     }
 

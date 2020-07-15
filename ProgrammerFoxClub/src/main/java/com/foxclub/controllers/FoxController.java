@@ -21,9 +21,10 @@ public class FoxController {
 
     @RequestMapping(value = {"index"}, method = RequestMethod.GET)
     public String getIndex(@RequestParam(value = "name", required = false, defaultValue = "none") String name, Model model) {
-        if (service.checkUserExists(name)) {
-            loggedName = name;
-        } else return "login";
+        loggedName = name;
+//        if (service.checkUserExists(name)) {
+//            loggedName = name;
+//        } else return "login";
 //        if(!name.equals(loggedName) || name.equals("none")) {
 //            return "login";
 //        }

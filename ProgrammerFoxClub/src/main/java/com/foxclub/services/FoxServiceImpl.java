@@ -3,7 +3,9 @@ package com.foxclub.services;
 import com.foxclub.models.Drink;
 import com.foxclub.models.Food;
 import com.foxclub.models.Fox;
+import com.foxclub.models.User;
 import com.foxclub.repository.FoxDatabase;
+import com.foxclub.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +19,14 @@ import java.util.stream.Collectors;
 @Service
 public class FoxServiceImpl implements FoxService {
 
-    @Autowired
     private FoxDatabase database;
+    private UsersRepository usersRepository;
+
+    @Autowired
+    public FoxServiceImpl(FoxDatabase database, UsersRepository usersRepository) {
+        this.database = database;
+        this.usersRepository = usersRepository;
+    }
 
     public Fox getAFox(String name) {
         return database.getFoxList().stream().filter(x -> x.getName().equals(name)).findFirst().orElse(null);
@@ -104,6 +112,21 @@ public class FoxServiceImpl implements FoxService {
             return getAFox(name).getLogs();
         }
         return null;
+    }
+
+    @Override
+    public void addANewUser(User user) {
+        usersRepository.save(user);
+    }
+
+    @Override
+    public boolean checkPassword(String userName, String password) {
+        for (User user : usersRepository.findAll()) {
+            if (user.getUserName().equals(userName) && user.getPassword().equals(password)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private String getTimeStamp() {

@@ -1,12 +1,12 @@
 package com.foxclub.controllers;
 
+import com.foxclub.models.User;
 import com.foxclub.services.FoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
@@ -14,7 +14,34 @@ public class LoginController {
     @Autowired
     private FoxService service;
     private static String loggedName;
-    boolean userExists = true;
+    boolean userExists = false;
+    boolean matchingPasswords = true;
+
+    @GetMapping("register")
+    public String registerPage(Model model) {
+        if(userExists){
+            model.addAttribute("userExists", true);
+        }
+        if(!matchingPasswords){
+            model.addAttribute("matchingPasswords", false);
+        }
+        return "register";
+    }
+
+    @PostMapping("register")
+    public String registerUser(String userName, String password, String passwordCheck, Model model) {
+        userExists = service.checkUserExists(userName);
+        if(userExists){
+            return "redirect:/register";
+        }
+        if(!password.equals(passwordCheck)){
+            matchingPasswords = false;
+            return "redirect:/register";
+        }
+        service.addANewUser(new User(userName, password));
+        userExists = true;
+        return "redirect:/login";
+    }
 
     @GetMapping("login")
     public String showLoginScreen(Model model) {
@@ -23,14 +50,11 @@ public class LoginController {
     }
 
     @PostMapping("login")
-    public String userLogin(@RequestParam(value = "name") String name, Model model) {
-        userExists = service.checkUserExists(name);
-        if (!userExists) {
+    public String userLogin(String userName, String password, Model model) {
+        if (!service.checkPassword(userName, password)) {
             return "login";
         }
-        loggedName = name;
-        model.addAttribute("userExists", userExists);
-        model.addAttribute("loggedName", loggedName);
-        return "redirect:/index?name=" + name;
+        loggedName = userName;
+        return "redirect:/index?name=" + userName;
     }
 }

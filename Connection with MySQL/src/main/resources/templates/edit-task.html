@@ -15,7 +15,7 @@
     <input autofocus required id="description" name="description" th:value="${task.description}">
 
     <label for="dueDate">Provide Due Date</label>
-    <input autofocus required id="dueDate" type="datetime-local" th:value="${{task.getDueDateDateFormat()}}" name="toDoBefore">
+    <input autofocus required id="dueDate" type="datetime-local" th:field="${task.dueDate}">
 
     <label for="isUrgent">Urgent?</label>
     <input type="checkbox" id="isUrgent" name="urgent" th:checked="${task.urgent}">

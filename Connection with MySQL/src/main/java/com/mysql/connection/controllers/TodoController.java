@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller("/todo")
@@ -71,9 +70,9 @@ public class TodoController {
 
     @PostMapping("add-task")
     public String addtask(@RequestParam("toDoBefore") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime toDoBefore, @ModelAttribute("task") Task task){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy HH:mm:ss");
-        String dueDate =  toDoBefore.format(formatter);
-        todoService.createTask(task.getTitle(), task.getDescription(), dueDate, task.isUrgent(), false);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy HH:mm:ss");
+//        String dueDate =  toDoBefore.format(formatter);
+        todoService.createTask(task.getTitle(), task.getDescription(), task.getDueDate(), task.isUrgent(), false);
         return "redirect:/list";
     }
 
@@ -91,10 +90,12 @@ public class TodoController {
     }
 
     @PostMapping("edit-task")
-    public String submitEditedTask(@RequestParam (value = "id") long id, @RequestParam("toDoBefore") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime toDoBefore, @ModelAttribute("task") Task task, long assigneeId) throws ParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy HH:mm:ss");
-        String dueDate =  toDoBefore.format(formatter);
-        todoService.updateTask(id, assigneeId, task.getTitle(), task.getDescription(), dueDate, task.isUrgent(), task.isDone());
+    public String submitEditedTask(@RequestParam (value = "id") long id, @ModelAttribute("task") Task task, long assigneeId) throws ParseException {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy HH:mm:ss");
+//        String dueDate =  toDoBefore.format(formatter);
+//        @RequestParam("toDoBefore") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime toDoBefore,
+//        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        todoService.updateTask(id, assigneeId, task.getTitle(), task.getDescription(), task.getDueDate(), task.isUrgent(), task.isDone());
         return "redirect:/list";
     }
 }

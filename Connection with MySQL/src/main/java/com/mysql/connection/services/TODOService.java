@@ -9,7 +9,7 @@ public interface TODOService {
 
     List<Task> getAllTasks();
 
-    void createTask(String title, String description, String dueDate, boolean urgent, boolean done);
+    void createTask(String title, String description, LocalDateTime dueDate, boolean urgent, boolean done);
 
     List<Task> getAllActiveTasks();
 
@@ -17,7 +17,7 @@ public interface TODOService {
 
     Task getTask(long id);
 
-    void updateTask(Long id, Long assigneeId, String title, String description, String dueDate, boolean urgent, boolean done);
+    void updateTask(Long id, Long assigneeId, String title, String description, LocalDateTime dueDate, boolean urgent, boolean done);
 
     List<Task> searchedItems(String searchItem);
 

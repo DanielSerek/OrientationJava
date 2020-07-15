@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 @SpringBootApplication
 public class ConnectionApplication implements CommandLineRunner {
@@ -34,5 +36,10 @@ public class ConnectionApplication implements CommandLineRunner {
 //        todoService.createTask("Neighbour", "Kill the neighbour", strDate, true, false);
 //        assigneeService.createAssignee("Daniel Šerek", "daniel.serek.uk@gmail.com");
         assigneeService.createAssignee("Noname", "noname@gmail.com");
+    }
+
+    @Bean
+    public Java8TimeDialect java8TimeDialect() {
+        return new Java8TimeDialect();
     }
 }

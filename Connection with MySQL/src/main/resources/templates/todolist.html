@@ -50,8 +50,6 @@
         </tr>
         </thead>
             <tr th:each="todo : ${todos}" th:object="${todo}">
-                <!--        <td th:text="*{id}"></td>-->
-
                 <td th:text="*{id}"></td>
                 <td th:text="*{title}"></td>
                 <td th:text="*{description}"></td>
@@ -63,6 +61,20 @@
                 <td><a th:href="@{|/delete-task/*{id}|}"><button type="button" class="btn btn-outline-warning">Delete</button> </a></td>
                 <td><a th:href="@{|*{id}/edit|}"><button type="button" class="btn btn-outline-warning">Edit</button> </a></td>
             </tr>
+
+<!--        <tr th:each="todo : ${todos}">-->
+<!--            <td th:text="${todo.id}"></td>-->
+<!--            <td th:text="${todo.title}"></td>-->
+<!--            <td th:text="${todo.description}"></td>-->
+<!--            <td th:text="${todo.dueDate}"></td>-->
+<!--            <td th:text="${todo.timeStamp}"></td>-->
+<!--            <td><a th:href="${todo.assignee != null} ? @{|/assignees-list/${todo.assignee.assigneeId}|} : @{|/list|}" th:text="${todo.assignee != null && todo.assignee.name != null} ? ${todo.assignee.name} : 'No name provided'"></a></td>-->
+<!--            <td th:text="${todo.urgent}"></td>-->
+<!--            <td th:text="${todo.done}"></td>-->
+<!--            <td><a th:href="@{|/delete-task/${todo.id}|}"><button type="button" class="btn btn-outline-warning">Delete</button> </a></td>-->
+<!--            <td><a th:href="@{|${todo.id}/edit|}"><button type="button" class="btn btn-outline-warning">Edit</button> </a></td>-->
+<!--        </tr>-->
+
     </table>
 </div>
 

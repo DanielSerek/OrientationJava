@@ -3,6 +3,7 @@ package com.foxclub.services;
 import com.foxclub.models.Drink;
 import com.foxclub.models.Food;
 import com.foxclub.models.Fox;
+import com.foxclub.models.User;
 
 import java.util.List;
 
@@ -24,4 +25,8 @@ public interface FoxService {
     Drink getDefaultDrink(String name);
 
     List<String> getLogs(String name);
+
+    void addANewUser(User user);
+
+    boolean checkPassword(String userName, String password);
 }

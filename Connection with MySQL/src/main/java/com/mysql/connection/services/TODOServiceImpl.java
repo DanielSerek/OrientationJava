@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,10 +31,10 @@ public class TODOServiceImpl implements TODOService{
     }
 
     @Override
-    public void createTask(String title, String description, String dueDate, boolean urgent, boolean done) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(dueDate, formatter);
-        Task task = new Task(title, description, dateTime, urgent, done);
+    public void createTask(String title, String description, LocalDateTime dueDate, boolean urgent, boolean done) {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy HH:mm:ss");
+//        LocalDateTime dateTime = LocalDateTime.parse(dueDate, formatter);
+        Task task = new Task(title, description, dueDate, urgent, done);
         this.todoRepository.save(task);
     }
 
@@ -58,10 +57,10 @@ public class TODOServiceImpl implements TODOService{
     }
 
     @Override
-    public void updateTask(Long id, Long assigneeId, String title, String description, String dueDate, boolean urgent, boolean done) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(dueDate, formatter);
-        Task task = new Task(title, description, dateTime, urgent, done);
+    public void updateTask(Long id, Long assigneeId, String title, String description, LocalDateTime dueDate, boolean urgent, boolean done) {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy HH:mm:ss");
+//        LocalDateTime dateTime = LocalDateTime.parse(dueDate, formatter);
+        Task task = new Task(title, description, dueDate, urgent, done);
         task.setId(id);
         task.setAssignee(this.assigneeRepository.getOne(assigneeId));
         this.todoRepository.save(task);
@@ -108,8 +107,8 @@ public class TODOServiceImpl implements TODOService{
         Date from = Date.from(fromDate.atZone(ZoneId.systemDefault()).toInstant());
         Date to = Date.from(toDate.atZone(ZoneId.systemDefault()).toInstant());
         return this.todoRepository.findAll().stream()
-                .filter(x -> Date.from(x.getDueDateDateFormat().atZone(ZoneId.systemDefault()).toInstant()).after(from)
-                        && Date.from(x.getDueDateDateFormat().atZone(ZoneId.systemDefault()).toInstant()).before(to))
+                .filter(x -> Date.from(x.getDueDate().atZone(ZoneId.systemDefault()).toInstant()).after(from)
+                        && Date.from(x.getDueDate().atZone(ZoneId.systemDefault()).toInstant()).before(to))
                 .collect(Collectors.toList());
     }
 }
