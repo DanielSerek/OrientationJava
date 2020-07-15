@@ -11,13 +11,24 @@
     <label for="title">Provide title</label>
     <input autofocus required id="title" name="title" th:value="${task.title}">
 
+    <label for="description">Provide description</label>
+    <input autofocus required id="description" name="description" th:value="${task.description}">
+
+    <label for="dueDate">Provide Due Date</label>
+    <input autofocus required id="dueDate" type="datetime-local" th:value="${{task.getDueDateDateFormat()}}" name="toDoBefore">
+
     <label for="isUrgent">Urgent?</label>
     <input type="checkbox" id="isUrgent" name="urgent" th:checked="${task.urgent}">
 
     <label for="isDone">Completed?</label>
     <input type="checkbox" id="isDone" name="done" th:checked="${task.done}">
+
+    <select id="assignees" name="assigneeId">
+        <option th:each="assignee : ${assignees}" th:value="${assignee.assigneeId}" th:text="${assignee.name}"
+                th:selected="(${assignee != null && assignee.name != null && task.assignee != null}) ? ((${assignee.name} == ${task.assignee.name}) ? true : false) : false"></option>
+    </select>
+
     <button type="submit"> SUBMIT</button>
 </form>
-
 </body>
 </html>
