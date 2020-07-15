@@ -33,6 +33,6 @@ public class ConnectionApplication implements CommandLineRunner {
 //        todoService.createTask("Coding", "Practice coding", strDate, true, false);
 //        todoService.createTask("Neighbour", "Kill the neighbour", strDate, true, false);
 //        assigneeService.createAssignee("Daniel Šerek", "daniel.serek.uk@gmail.com");
-//        assigneeService.createAssignee("Noname", "noname@gmail.com");
+        assigneeService.createAssignee("Noname", "noname@gmail.com");
     }
 }

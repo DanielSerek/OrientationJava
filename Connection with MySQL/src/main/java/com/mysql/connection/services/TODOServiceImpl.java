@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -102,12 +104,12 @@ public class TODOServiceImpl implements TODOService{
         if(this.todoRepository.findAll() == null || this.todoRepository.findAll().isEmpty()) {
             return null;
         }
-//        Date current =
-//        Date from = Date.from(fromDate.atZone(ZoneId.systemDefault()).toInstant());
-//        Date to = Date.from(toDate.atZone(ZoneId.systemDefault()).toInstant());
-//        return this.todoRepository.findAll().stream()
-//                .filter(x -> x.getDueDateDateFormat().after(from) && x.getDueDateDateFormat().before(to))
-//                .collect(Collectors.toList());
-        return null;
+        // Conversion from LocalDateTime to Date (needs to be done in stream as well)
+        Date from = Date.from(fromDate.atZone(ZoneId.systemDefault()).toInstant());
+        Date to = Date.from(toDate.atZone(ZoneId.systemDefault()).toInstant());
+        return this.todoRepository.findAll().stream()
+                .filter(x -> Date.from(x.getDueDateDateFormat().atZone(ZoneId.systemDefault()).toInstant()).after(from)
+                        && Date.from(x.getDueDateDateFormat().atZone(ZoneId.systemDefault()).toInstant()).before(to))
+                .collect(Collectors.toList());
     }
 }
