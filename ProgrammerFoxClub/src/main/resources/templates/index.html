@@ -6,11 +6,11 @@
 
 <body>
 
-<div th:replace="fragments :: links (${loggedName})"></div>
+<div th:replace="fragments :: links (${loggedId})"></div>
 
 <img src="greenfox.png" alt="Green Fox">
 
-<p th:text="'This is Mr. ' + ${fox.name} + '. Currently living on ' + ${fox.drink} + ' and ' + ${fox.food} + '. He knows ' + ((${#lists.isEmpty(fox.tricks)}) ? '0' : ${fox.tricks.size()})  + ' tricks.'"></p>
+<p th:text="'This is Mr. ' + ${fox.user.getUserName()} + '. Currently living on ' + ${fox.drink} + ' and ' + ${fox.food} + '. He knows ' + ((${#lists.isEmpty(fox.tricks)}) ? '0' : ${fox.tricks.size()})  + ' tricks.'"></p>
 
 <h1>Known tricks</h1>
 <div th:if="${fox.tricks != null}">

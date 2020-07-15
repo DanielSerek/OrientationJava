@@ -8,9 +8,10 @@ import com.foxclub.models.User;
 import java.util.List;
 
 public interface FoxService {
-    Fox getAFox(String name);
 
-    boolean checkUserExists(String name);
+    Fox getAFox(long id);
+
+    Fox getAFox(String name);
 
     void changeNutrition(String name, String food, String drink);
 
@@ -28,5 +29,7 @@ public interface FoxService {
 
     void addANewUser(User user);
 
-    boolean checkPassword(String userName, String password);
+    void addANewFox(Fox fox);
+
+    long getUserId(String userName, String password);
 }

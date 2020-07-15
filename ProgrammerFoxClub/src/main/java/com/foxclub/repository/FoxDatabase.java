@@ -17,7 +17,7 @@ public class FoxDatabase {
     public FoxDatabase() {
         this.foxList.add(new Fox("Karak", new ArrayList<>(Arrays.asList("kills other foxes", "plays piano")), Food.Pasta, Drink.Cola));
         this.foxList.add(new Fox("John", null, Food.Steaks, Drink.Whiskey));
-        tricks = new ArrayList<>(Arrays.asList("shoplifting", "raping", "killing", "torturing", "fighting", "kidnapping"));
+
     }
 
     public List<Fox> getFoxList() {

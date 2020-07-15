@@ -4,83 +4,90 @@ import com.foxclub.models.Drink;
 import com.foxclub.models.Food;
 import com.foxclub.models.Fox;
 import com.foxclub.models.User;
-import com.foxclub.repository.FoxDatabase;
+import com.foxclub.repository.FoxRepository;
 import com.foxclub.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
 public class FoxServiceImpl implements FoxService {
 
-    private FoxDatabase database;
     private UsersRepository usersRepository;
+    private FoxRepository foxRepository;
 
     @Autowired
-    public FoxServiceImpl(FoxDatabase database, UsersRepository usersRepository) {
-        this.database = database;
+    public FoxServiceImpl(UsersRepository usersRepository, FoxRepository foxRepository) {
         this.usersRepository = usersRepository;
+        this.foxRepository = foxRepository;
     }
 
-    public Fox getAFox(String name) {
-        return database.getFoxList().stream().filter(x -> x.getName().equals(name)).findFirst().orElse(null);
+    @Override
+    public Fox getAFox(long id) {
+        return this.foxRepository.findAll().stream().filter(x -> x.getUser().getId()==id).findFirst().orElse(null);
     }
 
-    public boolean checkUserExists(String name) {
-        if (getAFox(name) != null) {
-            if (getAFox(name).getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
+    public Fox getAFox(String name){
+       return this.foxRepository.findAll().stream().filter(x -> x.getUser().getUserName().equals(name)).findFirst().orElse(null);
     }
+
+//    public long checkUserExists(String name) {
+//        if (getAFox(id) != null) {
+//            if (getAFox(id).getUser().getUserName().equals(name)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     public void changeNutrition(String name, String food, String drink) {
         Fox fox = getAFox(name);
-        if (fox.getName().equals(name)) {
-            Food previousFood = fox.getFood();
-            fox.setFood(Food.valueOf(food));
-            if (previousFood != Food.valueOf(food)) {
-                fox.addLog(getTimeStamp() + " : Food has been changed from: " + previousFood.toString() + " to: " + food);
-            }
-            Drink previousDrink = fox.getDrink();
-            fox.setDrink(Drink.valueOf(drink));
-            if (previousDrink != Drink.valueOf(drink)) {
-                fox.addLog(getTimeStamp() + " : Drink has been changed from: " + previousDrink.toString() + " to: " + drink);
-            }
+        if(fox == null) {
+            return;
         }
+        Food previousFood = fox.getFood();
+        fox.setFood(Food.valueOf(food));
+        if (previousFood != Food.valueOf(food)) {
+            fox.addLog(getTimeStamp() + " : Food has been changed from: " + previousFood.toString() + " to: " + food);
+        }
+        Drink previousDrink = fox.getDrink();
+        fox.setDrink(Drink.valueOf(drink));
+        if (previousDrink != Drink.valueOf(drink)) {
+            fox.addLog(getTimeStamp() + " : Drink has been changed from: " + previousDrink.toString() + " to: " + drink);
+        }
+        foxRepository.save(fox);
     }
 
     public void learnATrick(String name, String trick) {
         Fox fox = getAFox(name);
-        if (fox.getName().equals(name)) {
-            if (!(fox.getTricks().contains(trick))) {
-                fox.addTrick(trick);
-                fox.addLog(getTimeStamp() + " : Learned to: " + trick);
-            }
+        if(fox == null) {
+            return;
         }
+        if (!(fox.getTricks().contains(trick))) {
+            fox.addTrick(trick);
+            fox.addLog(getTimeStamp() + " : Learned to: " + trick);
+        }
+        foxRepository.save(fox);
     }
 
     public List<String> getTricks(String name) {
-        List<String> unavailable = database.getTricks().stream()
-                .filter(e -> (getAFox(name).getTricks().stream()
-                        .filter(d -> d.equals(e))
-                        .count()) < 1)
-                .collect(Collectors.toList());
-
-//        List<String> newTricks = new ArrayList();
-//        for (String trick : database.getTricks()) {
-//            if(!getAFox(name).getTricks().contains(trick)){
-//                newTricks.add(trick);
-//            }
-//        }
-        return unavailable;
+//        List<String> unavailable = this.foxRepository.findAll().stream()
+//                .filter(e -> (getAFox(name).getTricks().stream()
+//                        .filter(d -> d.equals(e))
+//                        .count()) < 1)
+//                .collect(Collectors.toList());
+        List<String> tricksToLearn = new ArrayList();
+        List<String> alltricks = new ArrayList<>(Arrays.asList("shoplifting", "raping", "killing", "torturing", "fighting", "kidnapping"));
+        Fox fox = getAFox(name);
+        for (String trick : fox.getTricks()) {
+            if (!alltricks.contains(trick)) {
+                tricksToLearn.add(trick);
+            }
+        }
+        return tricksToLearn;
     }
 
     public boolean allSkillsLearned(String name) {
@@ -90,28 +97,28 @@ public class FoxServiceImpl implements FoxService {
 //            }
 //        }
 //        return true;
-        return database.getTricks().stream().allMatch(getAFox(name).getTricks()::contains);
+        return this.foxRepository.findAll().stream().map(x -> x.getTricks()).allMatch(getAFox(name).getTricks()::contains);
     }
 
     public Food getDefaultFood(String name) {
-        if (getAFox(name).getName().equals(name)) {
-            return getAFox(name).getFood();
+        if (getAFox(name) == null){
+            return null;
         }
-        return null;
+        return getAFox(name).getFood();
     }
 
     public Drink getDefaultDrink(String name) {
-        if (getAFox(name).getName().equals(name)) {
-            return getAFox(name).getDrink();
+        if (getAFox(name) == null){
+            return null;
         }
-        return null;
+        return getAFox(name).getDrink();
     }
 
     public List<String> getLogs(String name) {
-        if (getAFox(name).getName().equals(name)) {
-            return getAFox(name).getLogs();
+        if (getAFox(name) == null){
+            return null;
         }
-        return null;
+        return getAFox(name).getLogs();
     }
 
     @Override
@@ -120,13 +127,18 @@ public class FoxServiceImpl implements FoxService {
     }
 
     @Override
-    public boolean checkPassword(String userName, String password) {
+    public void addANewFox(Fox fox) {
+        foxRepository.save(fox);
+    }
+
+    @Override
+    public long getUserId(String userName, String password) {
         for (User user : usersRepository.findAll()) {
             if (user.getUserName().equals(userName) && user.getPassword().equals(password)){
-                return true;
+                return user.getUserId();
             }
         }
-        return false;
+        return -1;
     }
 
     private String getTimeStamp() {

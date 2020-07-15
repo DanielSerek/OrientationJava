@@ -6,14 +6,14 @@
 
 <body>
 
-<div th:replace="fragments :: links (${loggedName})"></div>
+<div th:replace="fragments :: links (${loggedId})"></div>
 
 <div th:if="${allLearned}">
     <p> You are a bloody bastard, there is nothing to learn more!</p>
 </div>
 
 <div th:unless="${allLearned}">
-    <form th:action="'/trickCenter?name=' + ${loggedName}" th:method="post">
+    <form th:action="'/trickCenter?loggedId=' + ${loggedId}" th:method="post">
         <datalist id="tricks">
             <option th:each="trick : ${tricks}" th:value="${trick}" th:text="${trick}"></option>
         </datalist>

@@ -6,12 +6,12 @@
 </head>
 
 <body>
-<div th:fragment="links (loggedName)">
+<div th:fragment="links (loggedId)">
     <ul>
-        <li><a th:href="'/index?name=' + ${loggedName}">Information</a></li>
-        <li><a th:href="'/nutritionStore?name=' + ${loggedName}">Nutrition Store</a></li>
-        <li><a th:href="'/trickCenter?name=' + ${loggedName}">Trick Center</a></li>
-        <li><a th:href="'/actionHistory?name=' + ${loggedName}">Action History</a></li>
+        <li><a th:href="'/index?loggedId=' + ${loggedId}">Information</a></li>
+        <li><a th:href="'/nutritionStore?loggedId=' + ${loggedId}">Nutrition Store</a></li>
+        <li><a th:href="'/trickCenter?loggedId=' + ${loggedId}">Trick Center</a></li>
+        <li><a th:href="'/actionHistory?loggedId=' + ${loggedId}">Action History</a></li>
     </ul>
 </div>
 </body>

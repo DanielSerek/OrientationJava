@@ -6,11 +6,11 @@
 
 <body>
 
-<div th:replace="fragments :: links (${loggedName})"></div>
+<div th:replace="fragments :: links (${loggedId})"></div>
 
 <img src="greenfox.png" alt="Green Fox">
 
-<form th:action="'/nutritionStore?name=' + ${loggedName}" th:method="post">
+<form th:action="'/nutritionStore?loggedId=' + ${loggedId}" th:method="post">
     <label for="fooditems">Food</label>
     <select id="fooditems" name="food">
         <option th:each="itemOfFood : ${foods}" th:value="${itemOfFood}" th:text="${itemOfFood}"

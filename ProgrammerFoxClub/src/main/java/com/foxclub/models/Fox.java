@@ -1,29 +1,57 @@
 package com.foxclub.models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Fox {
-    private String name;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long foxId;
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private User user;
+    @ElementCollection
     private List<String> tricks;
     private Food food;
     private Drink drink;
+    @ElementCollection
     private List<String> logs;
 
     public Fox(String name, List<String> tricks, Food food, Drink drink) {
-        this.name = name;
         this.tricks = tricks;
         this.food = food;
         this.drink = drink;
         logs = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
+    public Fox(){
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public long getFoxId() {
+        return foxId;
+    }
+
+    public void setFoxId(long foxId) {
+        this.foxId = foxId;
+    }
+
+    public void setTricks(List<String> tricks) {
+        this.tricks = tricks;
+    }
+
+    public void setLogs(List<String> logs) {
+        this.logs = logs;
     }
 
     public List<String> getTricks() {

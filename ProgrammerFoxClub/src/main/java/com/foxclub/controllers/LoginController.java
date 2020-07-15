@@ -13,9 +13,9 @@ public class LoginController {
 
     @Autowired
     private FoxService service;
-    private static String loggedName;
     boolean userExists = false;
     boolean matchingPasswords = true;
+    long loggedId;
 
     @GetMapping("register")
     public String registerPage(Model model) {
@@ -30,8 +30,8 @@ public class LoginController {
 
     @PostMapping("register")
     public String registerUser(String userName, String password, String passwordCheck, Model model) {
-        userExists = service.checkUserExists(userName);
-        if(userExists){
+        loggedId = service.getUserId(userName, password);
+        if(loggedId==-1){
             return "redirect:/register";
         }
         if(!password.equals(passwordCheck)){
@@ -51,10 +51,10 @@ public class LoginController {
 
     @PostMapping("login")
     public String userLogin(String userName, String password, Model model) {
-        if (!service.checkPassword(userName, password)) {
+        loggedId = service.getUserId(userName, password);
+        if (loggedId == -1) {
             return "login";
         }
-        loggedName = userName;
-        return "redirect:/index?name=" + userName;
+        return "redirect:/index?loggedId=" + loggedId;
     }
 }
