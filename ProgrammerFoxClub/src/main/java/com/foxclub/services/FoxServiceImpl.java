@@ -123,6 +123,9 @@ public class FoxServiceImpl implements FoxService {
 
     @Override
     public void addANewUser(User user) {
+        Fox fox = new Fox(user.getUserName(),Arrays.asList("sleep"), Food.Pasta, Drink.Beer);
+        foxRepository.save(fox);
+        fox.setUser(user);
         usersRepository.save(user);
     }
 

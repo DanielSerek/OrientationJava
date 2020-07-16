@@ -31,7 +31,7 @@ public class LoginController {
     @PostMapping("register")
     public String registerUser(String userName, String password, String passwordCheck, Model model) {
         loggedId = service.getUserId(userName, password);
-        if(loggedId==-1){
+        if(loggedId!=-1){
             return "redirect:/register";
         }
         if(!password.equals(passwordCheck)){

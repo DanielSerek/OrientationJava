@@ -30,7 +30,8 @@ public class FoxController {
 //        }
         model.addAttribute("fox", service.getAFox(loggedId));
         model.addAttribute("loggedId", service.getAFox(loggedId).getUser().getId());
-        model.addAttribute("logs", service.getAFox(loggedId).getLogs().stream().sorted(Comparator.reverseOrder()).limit(5).collect(Collectors.toList()));
+        model.addAttribute("logs", service.getLogs(service.getAFox(loggedId).getUser().getUserName()).stream()
+                .sorted(Comparator.reverseOrder()).limit(5).collect(Collectors.toList()));
         return "index";
     }
 
