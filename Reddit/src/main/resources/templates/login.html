@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <h1>Registration to Reddit</h1>
+    <form th:action="@{/login}" th:method="post">
+        <label for="userName">Username</label>
+        <input required id="userName" name="userName" type="text"><br>
+
+        <label for="password">Password</label>
+        <input required id="password" name="password" type="text"><br>
+        <input type="submit" value="LOGIN">
+    </form>
+    <div th:unless="${userExists}">
+        <p style="color:#ff0000">The user does not exist.</p>
+    </div>
+</body>
+</html>

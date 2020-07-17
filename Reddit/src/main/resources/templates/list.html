@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a new post</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/list-styles.css"/>
+</head>
+<body>
+<p th:text="'User: ' + (${user != null})? ${user} : ''"></p>
+<a th:href="@{|add-post?loggedId=${loggedId}|}">Submit a new post</a><br><br>
+    <div id="page-wrap" th:if="${not #lists.isEmpty(posts)}">
+        <h1>Trending posts</h1>
+        <br>
+        <br>
+        <table class="table">
+            <tr th:each="post : ${posts}">
+                <td class="spaceBetween" th:text="${post.votes}"></td>
+                <td class="spaceBetween"><a th:href="@{|add?postId=*{post.postId}|}">+</a></td>
+                <td class="spaceBetween"><a th:href="@{|deduct?postId=*{post.postId}|}">-</a></td>
+                <td class="spaceBetween" th:text="${post.timeStamp}"></td>
+                <td><a th:text="${post.title}" th:href="@{|*{post.url}|}" target="_blank"></a></td>
+            </tr>
+        </table>
+        <br><br>
+<!--        <div th:if="${totalpages > 1}" class="mypagination">-->
+<!--            <a th:each="page : ${pages}" th:href="@{list(page=${page})}"-->
+<!--               th:text="${page}" th:class="${page==currentPage} ? active"></a>-->
+<!--        </div>-->
+        <nav th:if="${totalpages > 1}" aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a th:each="page : ${pages}"
+                                         th:href="@{list(page=${page})}" th:text="${page}"
+                                         th:class="${page==currentPage} ? 'active page-link'  : 'page-link' "></a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>

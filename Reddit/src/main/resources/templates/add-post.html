@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Add a new post</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/add-post-styles.css"/>
 </head>
 <body>
-<h1>Submit a new post</h1>
-<br>
-<br>
-<form th:action="@{/add-post}" th:method="POST" >
-    <label for="title">Provide title</label><br>
-    <input autofocus required id="title" name="title" placeholder="provide title"><br>
+<div id="page-wrap">
+    <h1>Submit a new post</h1>
     <br>
-    <label for="url">URL:</label><br>
-    <input autofocus required id="url" name="url" placeholder="provide url">
+    <br>
+    <form th:action="@{/add-post}" th:method="POST" >
+        <label for="title">Provide title</label><br>
+        <input autofocus required id="title" name="title" placeholder="provide title"><br>
+        <br>
+        <label for="url">URL:</label><br>
+        <input autofocus required id="url" name="url" placeholder="provide url">
 
-    <button type="submit"> SUBMIT</button>
-</form>
-
+        <button type="submit"> SUBMIT</button>
+    </form>
+</div>
 </body>
 </html>

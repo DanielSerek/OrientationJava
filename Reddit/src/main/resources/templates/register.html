@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/register-styles.css"/>
+</head>
+
+<body>
+    <div id="page-wrap">
+        <h1>Welcome to Programmer Fox Club!</h1>
+        <h2>Registration form</h2><br>
+        <form th:action="@{/register}" th:method="post">
+            <label for="userName">User Name:</label><br>
+            <input required id="userName" name="userName" type="text"><br>
+
+            <label for="password">Password:</label><br>
+            <input required id="password" name="password" type="text"><br>
+
+            <label for="password-check">Repeat password:</label><br>
+            <input required id="password-check" name="passwordCheck" type="text"><br>
+
+            <input type="submit" value="REGISTER">
+        </form>
+    </div>
+
+    <div th:if="${userExists}">
+        <p>The user already exists! Try a different user name.</p>
+    </div>
+
+    <div th:unless="${matchingPasswords}">
+        <p>The passwords do not match.</p>
+    </div>
+</body>
+</html>
