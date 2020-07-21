@@ -1,10 +1,10 @@
 package com.apiexercises.frontend.models;
 
-public class ErrorObj {
+public class ErrorMessage {
 
     private String error;
 
-    public ErrorObj(String error) {
+    public ErrorMessage(String error) {
         this.error = error;
     }
 

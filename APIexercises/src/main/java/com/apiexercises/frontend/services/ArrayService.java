@@ -8,25 +8,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class ArrayService {
 
-    public Object arrayHandler(ArrayHandler arrayHandler) {
-        if(arrayHandler.getWhat()== What.Sum){
+    public void arrayHandler(ArrayHandler arrayHandler) {
+        if (arrayHandler.getWhat() == What.Sum) {
             long sum = 0;
             for (int number : arrayHandler.getNumbers()) {
                 sum += number;
             }
             arrayHandler.setResult(sum);
-            return arrayHandler;
         }
 
-        if(arrayHandler.getWhat()== What.Multiply){
+        if (arrayHandler.getWhat() == What.Multiply) {
             long sum = 1;
             for (int number : arrayHandler.getNumbers()) {
                 sum *= number;
             }
             arrayHandler.setResult(sum);
-            return arrayHandler;
         }
+    }
 
+    public Result arrayHandlerDouble(ArrayHandler arrayHandler){
         if(arrayHandler.getWhat()== What.Double){
             Integer[] output = new Integer[arrayHandler.getNumbers().length];
             for (int i = 0; i < arrayHandler.getNumbers().length; i++) {

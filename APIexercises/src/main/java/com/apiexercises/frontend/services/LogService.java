@@ -22,7 +22,9 @@ public class LogService {
         if (count == -1){
             count = this.logRepository.findAll().size();
         }
-        return this.logRepository.findAll().stream().limit(count).collect(Collectors.toList());
+        return this.logRepository.findAll().stream()
+                .limit(count)
+                .collect(Collectors.toList());
     }
 
     public List<Log> getPage(Long pageInput) {
@@ -34,9 +36,20 @@ public class LogService {
         }
 
         if (page == 1) {
-            return this.logRepository.findAll().stream().limit(10).collect(Collectors.toList());
+            return this.logRepository.findAll().stream()
+                    .limit(10)
+                    .collect(Collectors.toList());
         } else {
-            return this.logRepository.findAll().stream().collect(Collectors.toList()).subList((page - 1) * 10, ((page * 10) > max) ? max : page * 10);
+            return this.logRepository.findAll()
+                    .stream()
+                    .collect(Collectors.toList())
+                    .subList((page - 1) * 10, ((page * 10) > max) ? max : page * 10);
         }
+    }
+
+    public List<Log> search(String q) {
+        return this.logRepository.findAll().stream()
+                .filter(x -> x.getData().contains(q))
+                .collect(Collectors.toList());
     }
 }

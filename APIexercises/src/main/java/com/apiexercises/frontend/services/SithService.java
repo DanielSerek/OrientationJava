@@ -1,6 +1,5 @@
 package com.apiexercises.frontend.services;
 
-import com.apiexercises.frontend.models.ErrorObj;
 import com.apiexercises.frontend.models.Yoda;
 import org.springframework.stereotype.Service;
 
