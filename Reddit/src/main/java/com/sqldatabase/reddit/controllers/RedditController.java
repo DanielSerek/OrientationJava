@@ -19,14 +19,14 @@ public class RedditController {
     }
 
     @GetMapping("add-post")
-    public String addNewPost(@RequestParam(value = "loggedId") long loggedId){
-        return "redirect:/add-post?loggedId="+loggedId;
+    public String addNewPost(@RequestParam(value = "loggedId") long loggedId, Model model){
+        model.addAttribute("userId", loggedId);
+        return "add-post";
     }
-
-    @PostMapping("add-new-post")
+    @PostMapping("add-post")
     public String submitNewPost(@RequestParam(value = "loggedId") long loggedId, @ModelAttribute("post") Post post){
         this.redditService.createPost(loggedId, post.getTitle(),post.getUrl());
-        return "list";
+        return "redirect:/index?loggedId=" + loggedId;
     }
 
     @RequestMapping(value = {"/","index"})
@@ -45,14 +45,14 @@ public class RedditController {
     }
 
     @RequestMapping(value = {"add"})
-    public String addCounts(@RequestParam (value = "postId") long postId, Model model){
-        this.redditService.countChange(postId, "add");
-        return "list";
+    public String addCounts(@RequestParam (value = "postId") long postId, @RequestParam(value = "loggedId") long loggedId){
+        this.redditService.countChange(loggedId, postId, "add");
+        return "redirect:/index?loggedId=" + loggedId;
     }
 
     @RequestMapping(value = {"deduct"})
-    public String deductCounts(@RequestParam (value = "postId") long postId, Model model){
-        this.redditService.countChange(postId, "deduct");
-        return "list";
+    public String deductCounts(@RequestParam (value = "postId") long postId, @RequestParam(value = "loggedId") long loggedId){
+        this.redditService.countChange(loggedId, postId, "deduct");
+        return "redirect:/index?loggedId=" + loggedId;
     }
 }

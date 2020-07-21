@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class RedditServiceImpl implements RedditService {
@@ -27,7 +25,8 @@ public class RedditServiceImpl implements RedditService {
     @Override
     public void createPost(Long loggedId, String title, String url) {
         Post post = new Post(title, url);
-        post.setUser(this.redditRepository.findAll().stream().filter(x->x.getUser().getUserId()==loggedId).findFirst().orElse(null).getUser());
+        User user = this.usersRepository.getOne(loggedId);
+        post.setUser(user);
         this.redditRepository.save(post);
     }
 
@@ -35,27 +34,31 @@ public class RedditServiceImpl implements RedditService {
     public List<Post> getAllPosts(Integer page) {
         int max = this.redditRepository.findAll().size();
         if (page.equals(1)){
-            return this.redditRepository.findAll().stream()
-                    .sorted(Comparator.comparing(Post::getVotes).reversed())
-                    .limit(10)
-                    .collect(Collectors.toList());
+            return this.redditRepository.findAllByOrderByVotesDesc();
+//            return this.redditRepository.findAll().stream()
+//                    .sorted(Comparator.comparing(Post::getVotes).reversed())
+//                    .limit(10)
+//                    .collect(Collectors.toList());
         }
         else{
-            return this.redditRepository.findAll().stream()
-                    .sorted(Comparator.comparing(Post::getVotes).reversed())
-                    .collect(Collectors.toList())
+            return this.redditRepository.findAllByOrderByVotesDesc()
                     .subList((page-1)*10, ((page * 10) > max) ? max : page*10);
         }
     }
 
     @Override
-    public void countChange(long postId, String change) {
+    public void countChange(long loggedId, long postId, String change) {
         Post post = this.redditRepository.getOne(postId);
-        if(change.equals("add")){
-            post.setVotes(post.getVotes() + 1);
-        }
-        if(change.equals("deduct")){
-            post.setVotes(post.getVotes() - 1);
+
+        List<Long> idsVotedForPost = this.redditRepository.getOne(postId).getVotedUserIds();
+        if(!idsVotedForPost.contains(loggedId)) {
+            if (change.equals("add")) {
+                post.setVotes(post.getVotes() + 1);
+            }
+            if (change.equals("deduct")) {
+                post.setVotes(post.getVotes() - 1);
+            }
+            idsVotedForPost.add(loggedId);
         }
         post.setPostId(post.getPostId());
         this.redditRepository.save(post);
@@ -64,7 +67,7 @@ public class RedditServiceImpl implements RedditService {
     @Override
     public List<Integer> getPages() {
         int modulo = this.redditRepository.findAll().size() % 10;
-        int totalPages = this.redditRepository.findAll().size()/10;
+        int totalPages = this.redditRepository.findAll().size() / 10;
         if(modulo > 0) {
             totalPages++;
         }

@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,12 +24,15 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
+    @ElementCollection
+    private List<Long> votedUserIds;
 
     public Post(String title, String url) {
         this.title = title;
         this.url = url;
         this.votes = 0;
         timeStamp = new Date();
+        votedUserIds = new ArrayList<>();
     }
 
     public Post() {
@@ -79,5 +84,17 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Long> getVotedUserIds() {
+        return votedUserIds;
+    }
+
+    public void addVotingUserId(long userId){
+        this.votedUserIds.add(userId);
+    }
+
+    public void setVotedUserIds(List<Long> votedUserIds) {
+        this.votedUserIds = votedUserIds;
     }
 }

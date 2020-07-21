@@ -12,7 +12,7 @@ public interface RedditService {
 
     List<Post> getAllPosts(Integer page);
 
-    void countChange(long postId, String change);
+    void countChange(long loggedId, long postId, String change);
 
     List<Integer> getPages();
 

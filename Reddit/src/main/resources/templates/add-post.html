@@ -13,6 +13,7 @@
     <br>
     <br>
     <form th:action="@{/add-post}" th:method="POST" >
+        <input type="number" name="loggedId" hidden th:value="${userId}">
         <label for="title">Provide title</label><br>
         <input autofocus required id="title" name="title" placeholder="provide title"><br>
         <br>

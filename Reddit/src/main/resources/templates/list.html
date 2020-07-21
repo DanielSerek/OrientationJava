@@ -17,8 +17,9 @@
         <table class="table">
             <tr th:each="post : ${posts}">
                 <td class="spaceBetween" th:text="${post.votes}"></td>
-                <td class="spaceBetween"><a th:href="@{|add?postId=*{post.postId}|}">+</a></td>
-                <td class="spaceBetween"><a th:href="@{|deduct?postId=*{post.postId}|}">-</a></td>
+                <td class="spaceBetween"><a th:href="@{|add?postId=*{post.postId}&loggedId=${loggedId}|}">+</a></td>
+                <td class="spaceBetween"><a th:href="@{|deduct?postId=*{post.postId}&loggedId=${loggedId}|}">-</a></td>
+<!--                <td class="spaceBetween" th:text="${#temporals.format(post.timeStamp, 'dd-MM-yyyy HH:mm')}"></td>-->
                 <td class="spaceBetween" th:text="${post.timeStamp}"></td>
                 <td><a th:text="${post.title}" th:href="@{|*{post.url}|}" target="_blank"></a></td>
             </tr>
