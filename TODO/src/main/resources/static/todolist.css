@@ -1,0 +1,21 @@
+h1{
+    text-align: center;
+}
+
+.headerbuttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.myform{
+    display: flex;
+    justify-content: space-evenly;
+    vertical-align: center;
+}
+
+img{
+    mix-blend-mode: multiply;
+    width: 20px;
+    margin: 0 0 0 17px;
+}
+

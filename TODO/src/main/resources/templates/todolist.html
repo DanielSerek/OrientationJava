@@ -3,25 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>List Tasks</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/todolist.css">
 </head>
 <body>
 
-<h1>TODOs for today:</h1>
+<h1>TODOs Application</h1>
+<br><br>
 
-<a href="/assignees-list">List of Assigness</a>
-<br>
-<a href="/add-task">Submit a new task</a>
+<div class="headerbuttons">
+    <a href="/add-task" class="btn btn-warning">Submit a new task</a>
+    <a href="/assignees-list" class="btn btn-success">List of Assigness</a>
+</div>
 
-<div class="search">
+
+<br><br>
+<div class="myform">
     <form th:action="@{/search}" th:method="GET">
         <label for="searchItem">Search for:</label>
         <input autofocus id="searchItem" name="searchItem">
-        <button type="searchItem"> Search</button>
+        <button type="searchItem" class="btn btn-secondary">Search</button>
     </form>
-</div>
 
-<div class="search date">
     <form th:action="@{/searchDate}" th:method="GET">
         <label for="from">From</label>
         <input autofocus required id="from" type="datetime-local" name="fromDate">
@@ -29,12 +32,14 @@
         <label for="to">To</label>
         <input autofocus required id="to" type="datetime-local" name="toDate">
 
-        <button type="searchDate"> Search</button>
+        <button type="searchDate" class="btn btn-secondary">Filter</button>
     </form>
 </div>
 
+<br><br>
+
 <div th:if="${not #lists.isEmpty(todos)}">
-    <table class="table table-hover">
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>Id</th>
@@ -56,10 +61,11 @@
                 <td th:text="*{dueDate}"></td>
                 <td th:text="*{timeStamp}"></td>
                 <td><a th:href="*{assignee != null} ? @{|/assignees-list/*{assignee.assigneeId}|} : @{|/list|}" th:text="*{assignee != null && assignee.name != null} ? *{assignee.name} : 'No name provided'"></a></td>
-                <td th:text="*{urgent}"></td>
-                <td th:text="*{done}"></td>
-                <td><a th:href="@{|/delete-task/*{id}|}"><button type="button" class="btn btn-outline-warning">Delete</button> </a></td>
-                <td><a th:href="@{|*{id}/edit|}"><button type="button" class="btn btn-outline-warning">Edit</button> </a></td>
+<!--                <td th:text="*{urgent}"></td>-->
+                <td class="tdcenter"><img th:if="*{urgent}" th:src="@{'/true.png'}"/><img th:unless="*{urgent}" th:src="@{'/false.png'}"/></td>
+                <td class="tdcenter"><img th:if="*{done}" th:src="@{'/true.png'}"/><img th:unless="*{done}" th:src="@{'/false.png'}"/></td>
+                <td><a th:href="@{|/delete-task/*{id}|}"><button type="button" class="btn btn-outline-danger">Delete</button> </a></td>
+                <td><a th:href="@{|*{id}/edit|}"><button type="button" class="btn btn-outline-primary">Edit</button> </a></td>
             </tr>
 
 <!--        <tr th:each="todo : ${todos}">-->
@@ -76,7 +82,8 @@
 <!--        </tr>-->
 
     </table>
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
 </div>
-
 </body>
 </html>
