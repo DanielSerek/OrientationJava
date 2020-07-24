@@ -50,14 +50,4 @@ class CustomControllerTest {
                 .andExpect(content().string(containsString("{\"name\":\"Dan\",\"title\":\"student\",\"welcome_message\":\"Oh, hi there Dan, my dear student!\"}")))
                 .andDo(MockMvcResultHandlers.print());
     }
-
-    @Test
-    void doUntilSum5Returns15() throws Exception{
-        this.mockMvc.perform(get("https://localhost:" + port + "/doubling?input=5")).andExpect(status().isOk())
-                .andExpect(jsonPath("$.result").exists())
-                .andExpect(jsonPath("$.result").value(10))
-                .andDo(print());
-    }
-
-
 }
