@@ -28,4 +28,13 @@ public class GuardianControllerTest {
                 .andExpect(jsonPath("$.translated", is("I am Groot!")))
                 .andReturn();
     }
+
+    @Test
+    public void grootMessageGET_withoutParameter() throws Exception{
+        mockMvc.perform(get("/groot")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.error", is("I am Groot")))
+                .andReturn();
+    }
 }
