@@ -1,5 +1,7 @@
 package com.rascal.chat.services;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.rascal.chat.models.User;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +33,9 @@ public class LoginServiceImpl implements LoginService {
         data.put("password", password);
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(data, headers);
         ResponseEntity<?> response = restTemplate.postForEntity(url + "login", requestEntity, String.class);
-        String s = (String) response.getBody();
+        JsonObject apiKey = (JSONPObject) response.getBody();
+        String key = (String) apiKey.getValue();
+        User user = new User(login, password, key);
         return response;
     }
 
