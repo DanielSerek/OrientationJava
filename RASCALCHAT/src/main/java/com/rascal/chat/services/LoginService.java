@@ -1,8 +1,12 @@
 package com.rascal.chat.services;
 
-import org.springframework.http.ResponseEntity;
+import com.rascal.chat.models.UserLoginDTO;
 
 public interface LoginService {
 
-    ResponseEntity<?> logUser(String login, String password);
+    String logUser(UserLoginDTO userLoginDTO);
+
+    void registerUser(UserLoginDTO userLoginDTO);
+
+    void updateUrl(String apiKey, String username, String avatarurl);
 }

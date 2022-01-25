@@ -57,12 +57,19 @@ public class TODOServiceImpl implements TODOService{
     }
 
     @Override
-    public void updateTask(Long id, Long assigneeId, String title, String description, LocalDateTime dueDate, boolean urgent, boolean done) {
+    public void updateTask(Long id, Long assigneeId, String title, String description, LocalDateTime dueDate, Date originalTimeStamp, boolean urgent, boolean done) {
 //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy HH:mm:ss");
 //        LocalDateTime dateTime = LocalDateTime.parse(dueDate, formatter);
-        Task task = new Task(title, description, dueDate, urgent, done);
+        Task task = this.todoRepository.getOne(id);
         task.setId(id);
-        task.setAssignee(this.assigneeRepository.getOne(assigneeId));
+        task.setTitle(title);
+        task.setDescription(description);
+        task.setDueDate(dueDate);
+        task.setOriginalTimeStamp(originalTimeStamp);
+        task.setUrgent(urgent);
+        task.setDone(done);
+        // Task task = new Task(title, description, dueDate, originalTimeStamp, urgent, done);
+        // !!!!! task.setAssignee(this.assigneeRepository.getOne(assigneeId));
         this.todoRepository.save(task);
     }
 
@@ -74,7 +81,6 @@ public class TODOServiceImpl implements TODOService{
         List<Task> searchedItems = this.todoRepository.findAll().stream()
                 .filter(x -> x.getTitle().toLowerCase().contains(searchItem.toLowerCase()) || x.getAssignee().getName().toLowerCase().contains(searchItem.toLowerCase()))
                 .collect(Collectors.toList());
-
         if (searchedItems.isEmpty()) {
             searchedItems = null;
         }

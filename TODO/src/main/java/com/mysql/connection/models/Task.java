@@ -30,6 +30,8 @@ public class Task {
     @Temporal(TemporalType.TIMESTAMP)
     private Date timeStamp;
 
+    private Date originalTimeStamp;
+
     public Task(){
     }
 
@@ -39,7 +41,13 @@ public class Task {
         this.dueDate = dueDate;
         this.urgent = urgent;
         this.done = done;
-        timeStamp = new Date();
+        this.timeStamp = new Date();
+        this.originalTimeStamp = new Date();
+    }
+
+    public Task(String title, String description, LocalDateTime dueDate, Date originalTimeStamp, boolean urgent, boolean done){
+        this(title, description,dueDate, urgent,done);
+        this.originalTimeStamp = originalTimeStamp;
     }
 
     public long getId() {
@@ -95,14 +103,34 @@ public class Task {
         this.done = done;
     }
 
+    public Date getTimeStampDate(){
+        return this.timeStamp;
+    }
+
     public String getTimeStamp() {
+        if(this.timeStamp == null) return "";
         String pattern = "dd. MMMM yyyy HH:mm:ss";
         DateFormat df = new SimpleDateFormat(pattern);
-        return df.format(timeStamp);
+        return df.format(this.timeStamp);
     }
 
     public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public Date getOriginalTimeStampDate(){
+        return this.originalTimeStamp;
+    }
+
+    public String getOriginalTimeStamp() {
+        if(this.originalTimeStamp == null) return "";
+        String pattern = "dd. MMMM yyyy HH:mm:ss";
+        DateFormat df = new SimpleDateFormat(pattern);
+        return df.format(this.originalTimeStamp);
+    }
+
+    public void setOriginalTimeStamp(Date originalTimeStamp) {
+        this.originalTimeStamp = originalTimeStamp;
     }
 
     public Assignee getAssignee() {

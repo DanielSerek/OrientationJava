@@ -1,17 +1,17 @@
 package com.rascal.chat.models;
 
-public class User {
+public class UserLoginDTO {
+
     private String login;
     private String password;
-    private String apiKey;
 
-    public User(String login, String password, String apiKey) {
+
+    public UserLoginDTO(String login, String password) {
         this.login = login;
         this.password = password;
-        this.apiKey = apiKey;
     }
 
-    public User() {
+    public UserLoginDTO() {
     }
 
     public String getLogin() {
@@ -28,13 +28,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
     }
 }

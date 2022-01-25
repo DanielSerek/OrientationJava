@@ -3,6 +3,7 @@ package com.mysql.connection.controllers;
 import com.mysql.connection.models.Task;
 import com.mysql.connection.services.AssigneeService;
 import com.mysql.connection.services.TODOService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -30,12 +31,19 @@ public class TodoController {
     @RequestMapping(value = {"/","/list"})
     public String list(@RequestParam(required = false) boolean isActive, Model model){
         model.addAttribute("isActive", isActive);
-        if(isActive){
-            model.addAttribute("todos", this.todoService.getAllActiveTasks());
+        List<Task> tasks = null;
+        try{
+            if(isActive){
+                tasks = this.todoService.getAllActiveTasks();
+            }
+            else{
+                tasks = this.todoService.getAllTasks();
+            }
         }
-        else{
-            model.addAttribute("todos", this.todoService.getAllTasks());
+        catch (Exception e){
+            e.getMessage();
         }
+        model.addAttribute("todos", tasks);
         return "todolist";
     }
 
@@ -72,7 +80,7 @@ public class TodoController {
     public String addtask(@RequestParam("toDoBefore") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime toDoBefore, @ModelAttribute("task") Task task){
 //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy HH:mm:ss");
 //        String dueDate =  toDoBefore.format(formatter);
-        todoService.createTask(task.getTitle(), task.getDescription(), task.getDueDate(), task.isUrgent(), false);
+        todoService.createTask(task.getTitle(), task.getDescription(), toDoBefore, task.isUrgent(), false);
         return "redirect:/list";
     }
 
@@ -84,7 +92,8 @@ public class TodoController {
 
     @GetMapping("{id}/edit")
     public String editATask(@PathVariable long id, Model model){
-        model.addAttribute("task", todoService.getTask(id));
+        Object unproxiedEntity = Hibernate.unproxy(todoService.getTask(id));
+        model.addAttribute("task", (Task)unproxiedEntity);
         model.addAttribute("assignees", assigneeService.getAllAssignees());
         return "edit-task";
     }
@@ -95,7 +104,7 @@ public class TodoController {
 //        String dueDate =  toDoBefore.format(formatter);
 //        @RequestParam("toDoBefore") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime toDoBefore,
 //        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
-        todoService.updateTask(id, assigneeId, task.getTitle(), task.getDescription(), task.getDueDate(), task.isUrgent(), task.isDone());
+        todoService.updateTask(id, assigneeId, task.getTitle(), task.getDescription(), task.getDueDate(), todoService.getTask(id).getOriginalTimeStampDate(), task.isUrgent(), task.isDone());
         return "redirect:/list";
     }
 }

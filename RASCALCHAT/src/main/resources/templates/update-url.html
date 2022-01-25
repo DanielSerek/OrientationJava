@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<h1>Update Avatar URL!</h1>
+<form th:action="@{/user/update}" th:method="post" th:object="${userUdpateDTO}">
+<!--<form th:action="@{/user/update?apiKey=} + ${apiKey}" th:method="post">-->
+    <label for="username">Username</label>
+    <input required id="username" name="username" type="text"><br>
+
+    <label for="avatarurl">Avatar URL</label>
+    <input required id="avatarurl" name="avatarurl" type="text"><br>
+    <input type="submit" value="Submit">
+</form>
+
+<!--<div th:unless="${userExists}">-->
+<!--    <p style="color:#ff0000">The user does not exist.</p>-->
+<!--</div>-->
+
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.mysql.connection.services;
 import com.mysql.connection.models.Task;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public interface TODOService {
@@ -17,7 +18,7 @@ public interface TODOService {
 
     Task getTask(long id);
 
-    void updateTask(Long id, Long assigneeId, String title, String description, LocalDateTime dueDate, boolean urgent, boolean done);
+    void updateTask(Long id, Long assigneeId, String title, String description, LocalDateTime dueDate, Date originalTimeStamp, boolean urgent, boolean done);
 
     List<Task> searchedItems(String searchItem);
 

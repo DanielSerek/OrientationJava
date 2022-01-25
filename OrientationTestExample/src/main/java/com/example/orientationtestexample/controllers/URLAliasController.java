@@ -1,9 +1,9 @@
 package com.example.orientationtestexample.controllers;
 
+import com.example.orientationtestexample.models.SecretCode;
 import com.example.orientationtestexample.models.URLAlias;
 import com.example.orientationtestexample.services.URLAliasService;
 import com.example.orientationtestexample.viewmodels.URLAliasDTO;
-import com.fasterxml.jackson.databind.node.TextNode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -75,15 +75,15 @@ public class URLAliasController {
     }
 
     @PostMapping("/api/links/{id}")
-    public String deleteAlias(@PathVariable Long id, @RequestBody TextNode secretCode, HttpServletResponse resp) {
-        String status = urlAliasService.delete(id, String.valueOf(secretCode));
-        if(status == "success"){
+    public String deleteAlias(@PathVariable Long id, @RequestBody SecretCode secretCode, HttpServletResponse resp) {
+        String status = urlAliasService.delete(id, secretCode.getSecretCode());
+        if(status.equals("success")){
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
         }
-        else if(status == "notfound"){
+        else if(status.equals("notfound")){
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
-        else if(status == "incorrectcode"){
+        else if(status.equals("incorrectcode")){
             resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
         }
         return "index";

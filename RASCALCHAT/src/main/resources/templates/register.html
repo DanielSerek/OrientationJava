@@ -5,8 +5,8 @@
 </head>
 
 <body>
-<h1>Login to Rascal Chat!</h1>
-<form th:action="@{/login}" th:method="post">
+<h1>Register to Rascal Chat!</h1>
+<form th:action="@{/register}" th:method="post" th:object="userLoginDTO">
     <label for="login">Username</label>
     <input required id="login" name="login" type="text"><br>
 

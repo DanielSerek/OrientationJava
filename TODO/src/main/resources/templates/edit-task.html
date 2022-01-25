@@ -5,30 +5,30 @@
     <title>Edit a task</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-<body>
-<h1>Edit a task</h1>
-<form th:action="'/edit-task?id='+${task.id}" th:method="POST" >
-    <label for="title">Provide title</label>
-    <input autofocus required id="title" name="title" th:value="${task.title}">
+    <body>
+        <h1>Edit a task</h1>
+        <form th:action="'/edit-task?id='+${task.id}" th:method="POST" >
+            <label for="title">Provide title</label>
+            <input autofocus required id="title" name="title" th:value="${task.title}">
 
-    <label for="description">Provide description</label>
-    <input autofocus required id="description" name="description" th:value="${task.description}">
+            <label for="description">Provide description</label>
+            <input autofocus required id="description" name="description" th:value="${task.description}">
 
-    <label for="dueDate">Provide Due Date</label>
-    <input autofocus required id="dueDate" type="datetime-local" th:field="${task.dueDate}">
+            <label for="dueDate">Provide Due Date</label>
+            <input autofocus required id="dueDate" type="datetime-local" th:field="${task.dueDate}">
 
-    <label for="isUrgent">Urgent?</label>
-    <input type="checkbox" id="isUrgent" name="urgent" th:checked="${task.urgent}">
+            <label for="isUrgent">Urgent?</label>
+            <input type="checkbox" id="isUrgent" name="urgent" th:checked="${task.urgent}">
 
-    <label for="isDone">Completed?</label>
-    <input type="checkbox" id="isDone" name="done" th:checked="${task.done}">
+            <label for="isDone">Completed?</label>
+            <input type="checkbox" id="isDone" name="done" th:checked="${task.done}">
 
-    <select id="assignees" name="assigneeId">
-        <option th:each="assignee : ${assignees}" th:value="${assignee.assigneeId}" th:text="${assignee.name}"
-                th:selected="(${assignee != null && assignee.name != null && task.assignee != null}) ? ((${assignee.name} == ${task.assignee.name}) ? true : false) : false"></option>
-    </select>
+            <select id="assignees" name="assigneeId">
+                <option th:each="assignee : ${assignees}" th:value="${assignee.assigneeId}" th:text="${assignee.name}"
+                        th:selected="(${assignee != null && assignee.name != null && task.assignee != null}) ? ((${assignee.name} == ${task.assignee.name}) ? true : false) : false"></option>
+            </select>
 
-    <button type="submit"> SUBMIT</button>
-</form>
-</body>
+            <button type="submit"> SUBMIT</button>
+        </form>
+    </body>
 </html>

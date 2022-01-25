@@ -19,27 +19,16 @@
 
         <br><br>
 
-        <div class = chat-display>
+        <div class = chat-display th:each="message : ${messages}">
             <div class="row">
                 <div class="columnpic">
-                    <img src="/picture.jpg" width="30">
+                    <img th:src="${message.author.avatarUrl}" width="30">
                 </div>
                 <div class="columntext">
-                    <h2>username - date</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas libero. Morbi scelerisque luctus velit. Quisque tincidunt scelerisque libero. Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci. In enim a arcu imperdiet malesuada. Donec quis nibh at felis congue commodo</p>
+                    <b><p th:text="${message.author.username} + ' - ' +  ${message.created}"}></p></b>
+                    <p th:text="${message.content}"></p>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="columnpic">
-                    <img src="/picture.jpg" width="30">
-                </div>
-                <div class="columntext">
-                    <h2>username - date</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas libero. Morbi scelerisque luctus velit. Quisque tincidunt scelerisque libero. Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci. In enim a arcu imperdiet malesuada. Donec quis nibh at felis congue commodo</p>
-                </div>
-            </div>
-
         </div>
 
         <div class = message>

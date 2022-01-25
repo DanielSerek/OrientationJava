@@ -59,8 +59,8 @@
                 <td th:text="*{title}"></td>
                 <td th:text="*{description}"></td>
                 <td th:text="*{dueDate}"></td>
-                <td th:text="*{timeStamp}"></td>
-                <td><a th:href="*{assignee != null} ? @{|/assignees-list/*{assignee.assigneeId}|} : @{|/list|}" th:text="*{assignee != null && assignee.name != null} ? *{assignee.name} : 'No name provided'"></a></td>
+                <td th:text="*{originalTimeStamp}"></td>
+<!--                <td><a th:href="*{assignee != null} ? @{|/assignees-list/*{assignee.assigneeId}|} : @{|/list|}" th:text="*{assignee != null && assignee.name != null} ? *{assignee.name} : 'No name provided'"></a></td>-->
 <!--                <td th:text="*{urgent}"></td>-->
                 <td class="tdcenter"><img th:if="*{urgent}" th:src="@{'/true.png'}"/><img th:unless="*{urgent}" th:src="@{'/false.png'}"/></td>
                 <td class="tdcenter"><img th:if="*{done}" th:src="@{'/true.png'}"/><img th:unless="*{done}" th:src="@{'/false.png'}"/></td>
